@@ -40,31 +40,108 @@ class Solution:
         }]
         self.matched_sents.append({"text": sent.text, "ents": match_ents})
 
+    def subtree_matcher(doc):
+        subjpass = 0
+
+        for i, tok in enumerate(doc):
+            # find dependency tag that contains the text "subjpass"
+            if tok.dep_.find("subjpass") == True:
+                subjpass = 1
+
+        x = ''
+        y = ''
+
+        # if subjpass == 1 then sentence is passive
+        if subjpass == 1:
+            for i, tok in enumerate(doc):
+                if tok.dep_.find("subjpass") == True:
+                    y = tok.text
+
+                if tok.dep_.endswith("obj") == True:
+                    x = tok.text
+
+        # if subjpass == 0 then sentence is not passive
+        else:
+            for i, tok in enumerate(doc):
+                if tok.dep_.endswith("subj") == True:
+                    x = tok.text
+
+                if tok.dep_.endswith("obj") == True:
+                    y = tok.text
+
+        return x, y
     def extract_currency_relations(self,doc):
         spans = list(doc.ents) + list(doc.noun_chunks)
         spans = self.filter_spans(spans)
         with doc.retokenize() as retokenizer:
             for span in spans:
                 retokenizer.merge(span)
-        matcher = Matcher(self.nlp.vocab,validate=True)
+
+        allVerb = [token for token in doc if token.pos_ == "VERB"]
+        buyWord = []
+        similarWordForBuy = ["buy","acquire"]
+        for eachVerb in allVerb:
+            for similarWord in similarWordForBuy:
+                if self.nlp(eachVerb.lemma_).similarity(self.nlp(similarWord))>0.6:
+                    buyWord.append(eachVerb)
+        # print(buyWord)
+        for eachVerb in buyWord:
+            # childs = eachVerb.children
+            # print(list(childs))
+            subjpass = 0
+            for tok in eachVerb.children:
+                # find dependency tag that contains the text "subjpass"
+                # print(tok.dep_)
+                if tok.dep_.find("subjpass") == True:
+                    subjpass = 1
+            print(subjpass)
+            buyer = None
+            beBought = None
+            money = None
+            if subjpass == 0:
+                for each in eachVerb.children:
+                    if each.dep_=="nsubj":
+                        buyer = each
+                    elif each.dep_=='dobj':
+                        beBought = each
+                    elif each.dep_=="prep" and list(each.rights)[0].ent_type_=="MONEY":
+                        money = list(each.rights)[0]
+                        # print(money)
+                print((buyer,beBought,money))
+                    # print(eachVerb)
+            else:
+                # print(list(childs))
+                for each in eachVerb.children:
+                    # print(each.dep_+"haha")
+                    if each.dep_ == "nsubjpass":
+                        beBought = each
+                    elif each.dep_=="agent":
+                        for possible_noun in each.rights:
+                            if possible_noun.pos_=="PROPN" or possible_noun.ent_type_=="ORG":
+                                buyer = possible_noun
+                    elif each.dep_=="prep" and list(each.rights)[0].ent_type_=="MONEY":
+                        money = list(each.rights)[0]
+                print((buyer, beBought, money))
+            # break
+        # matcher = Matcher(self.nlp.vocab,validate=True)
         #
         # for tok in doc[:5]:
         #     print(tok.text, "-->", tok.dep_, "-->", tok.pos_,"-->",tok.ent_type_)
-        pattern1 = [{'ENT_TYPE': 'ORG'},
-                   {'LEMMA': {"IN":["buy","acquire","sell"]}},
-                   {'ENT_TYPE': 'ORG'}]
+        # pattern1 = [{'ENT_TYPE': 'ORG'},
+        #            {'LEMMA': {"IN":["buy","acquire","sell"]}},
+        #            {'ENT_TYPE': 'ORG'}]
 
         # pattern2 = [{'ENT_TYPE': 'ORG'},
         #            {'LEMMA': {"IN":["buy","acquire","sell"]}},
         #            {'ENT_TYPE': 'ORG'}]
 
-        matcher.add("CompanyOwn",self.collect_sents,pattern1)
-
-        matches = matcher(doc)
-        for match_id, start, end in matches:
-            string_id = self.nlp.vocab.strings[match_id]  # Get string representation
-            span = doc[start:end]  # The matched span
-            print(match_id, string_id, start, end, span.text)
+        # matcher.add("CompanyOwn",self.collect_sents,pattern1)
+        #
+        # matches = matcher(doc)
+        # for match_id, start, end in matches:
+        #     string_id = self.nlp.vocab.strings[match_id]  # Get string representation
+        #     span = doc[start:end]  # The matched span
+        #     print(match_id, string_id, start, end, span.text)
 
         # wordSet = set()
         # relations = []
@@ -124,10 +201,10 @@ class Solution:
         # # print(Counter(labels))
         html = displacy.render(doc,style='dep',page=True)
         outputfile = open('dep.html',"w",encoding='utf-8')
-        # outputfile.write(html)
+        outputfile.write(html)
         #
-        # html2 = displacy.render(doc,style='ent',page=True)
-        html2= displacy.render(self.matched_sents, style="ent", manual=True)
+        html2 = displacy.render(doc,style='ent',page=True)
+        # html2= displacy.render(self.matched_sents, style="ent", manual=True)
         outputfile2 = open('ent.html',"w",encoding='utf-8')
         outputfile2.write(html2)
 if __name__=='__main__':
