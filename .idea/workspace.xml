@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f664b6f6-8363-49cf-a19e-8cd20612c226" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/testForPartOf.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dep.html" beforeDir="false" afterPath="$PROJECT_DIR$/dep.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ent.html" beforeDir="false" afterPath="$PROJECT_DIR$/ent.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,15 +16,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/nlpDataExtraction$hello.coverage" NAME="hello Coverage Results" MODIFIED="1588434797255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/nlpDataExtraction$hello.coverage" NAME="hello Coverage Results" MODIFIED="1588444927728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hello.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-81">
-              <caret line="205" column="8" selection-start-line="205" selection-start-column="8" selection-end-line="205" selection-end-column="8" />
+            <state relative-caret-position="296">
+              <caret line="224" column="84" selection-start-line="224" selection-start-column="84" selection-end-line="224" selection-end-column="84" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -34,17 +35,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WikipediaArticles/Dallas.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="28" selection-start-line="2" selection-end-line="2" selection-end-column="191" />
+            <state relative-caret-position="-575">
+              <caret line="220" column="215" selection-start-line="220" selection-start-column="213" selection-end-line="220" selection-end-column="215" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WikipediaArticles/Amazon_com.txt">
+        <entry file="file://$PROJECT_DIR$/WikipediaArticles/NYC.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="71" />
+            <state>
+              <caret column="3" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -92,10 +93,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.txt">
+        <entry file="file://$PROJECT_DIR$/testForPartOf.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="266">
+              <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -120,12 +121,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>merger</find>
-      <find>the acquisition</find>
-      <find>Amazon acq</find>
-      <find>In addition, Amazon acquisitions include Ring, Twitch, Whole Foods Market, and IMDb.</find>
-      <find>The company initially started as an online marketplace</find>
-      <find>merg</find>
       <find>Kiva Systems</find>
       <find>acquisi</find>
       <find>whole food</find>
@@ -150,6 +145,12 @@
       <find>home</find>
       <find>j</find>
       <find>conj</find>
+      <find>located</find>
+      <find>situated</find>
+      <find>find</find>
+      <find>Texas</find>
+      <find>in</find>
+      <find>Globe Life Park</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -160,12 +161,12 @@
       <list>
         <option value="$PROJECT_DIR$/dep.html" />
         <option value="$PROJECT_DIR$/WikipediaArticles/Amazon_com.txt" />
-        <option value="$PROJECT_DIR$/hello.py" />
         <option value="$PROJECT_DIR$/test.txt" />
+        <option value="$PROJECT_DIR$/hello.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1440" />
     <option name="y" value="-72" />
     <option name="width" value="1920" />
@@ -176,7 +177,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -192,6 +192,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -280,11 +281,12 @@
       <workItem from="1588293221929" duration="39999000" />
       <workItem from="1588396866321" duration="6837000" />
       <workItem from="1588405260418" duration="1425000" />
+      <workItem from="1588436985693" duration="7789000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140537000" />
+    <option name="totallyTimeSpent" value="148326000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -297,24 +299,23 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="-72" width="1920" height="1014" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2257721" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22790202" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.32321042" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.32321042" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3982684" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32871288" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3286334" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32772276" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3275488" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5007153" side_tool="true" weight="0.2983871" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.45841584" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32871288" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.3286334" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -388,13 +389,6 @@
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/WikipediaArticles/Dallas.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="28" selection-start-line="2" selection-end-line="2" selection-end-column="191" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WikipediaArticles/Amazon_com.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -412,15 +406,15 @@
     <entry file="file://$PROJECT_DIR$/WikipediaArticles/AbrahamLincoln.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/kk.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/WikipediaArticles/IBM.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
           <caret line="27" column="389" selection-start-line="27" selection-start-column="355" selection-end-line="27" selection-end-column="389" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kk.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/dep.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -441,17 +435,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.txt">
+    <entry file="file://$PROJECT_DIR$/WikipediaArticles/Dallas.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="-575">
+          <caret line="220" column="215" selection-start-line="220" selection-start-column="213" selection-end-line="220" selection-end-column="215" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WikipediaArticles/NYC.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="3" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testForPartOf.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hello.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-81">
-          <caret line="205" column="8" selection-start-line="205" selection-start-column="8" selection-end-line="205" selection-end-column="8" />
+        <state relative-caret-position="296">
+          <caret line="224" column="84" selection-start-line="224" selection-start-column="84" selection-end-line="224" selection-end-column="84" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>

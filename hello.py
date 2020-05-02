@@ -210,30 +210,57 @@ class Solution:
             leftSub = None
             rightSub = None
             for token in eachSent:
-                if token.head.lemma_=='be' and token.dep_=='advcl':
-                    leftSub = token.subtree
-                elif token.head.lemma_=='be' and token.dep_=='nsubj':
-                    leftSub = token.subtree
-                elif token.head.lemma_=='be' and token.dep_=='attr':
-                    rightSub = token.subtree
-            # print(list(leftSub))
-            # print(list(rightSub))
-            if leftSub and rightSub:
-                for token in leftSub:
-                    # print(token)
-                    if token.pos_=='PROPN' and (token.ent_type_=="GPE" or token.ent_type_=="LOC"):
-                        smallLoc.append(token)
-                        # print(rightSub)
-                for token in rightSub:
-                    # print(token)
-                    if token.pos_ == 'PROPN' and token.dep_=='pobj' and (token.ent_type_=="GPE" or token.ent_type_=="ORG" or token.ent_type_=="LOC"):
-                        bigLoc.append(token)
-                        for i in token.conjuncts:
-                            bigLoc.append(i)
-                        # if smallLoc and bigLoc:
-            if smallLoc and bigLoc:
+                if token.head.dep_=='ROOT' and token.dep_.find('nsubj')>=0 and (token.ent_type_=="GPE" or token.ent_type_=="LOC"):
+                    smallLoc.append(token)
+                elif token.pos_ == 'PROPN' and token.dep_=='pobj' and (token.ent_type_=="GPE" or token.ent_type_=="ORG" or token.ent_type_=="LOC"):
+                    bigLoc.append(token)
+                elif token.dep_=='punct' and (token.ent_type == 'GPE' or token.ent_type == 'LOC'):
+                    bigLoc.append(token)
+            if smallLoc:
                 print(smallLoc,bigLoc)
                 print(smallLoc[0].sent)
+
+            for l in filter(lambda x:(x.pos_=='ADP'),eachSent):
+                # print(l)
+                if (l.nbor(-1).ent_type_ in ['GPE','LOC'] or l.nbor(-1).pos_=='PROPN') and (l.right_edge.ent_type_ in ['GPE','LOC']):
+                    print((l.nbor(-1),l.right_edge))
+                    print(l.sent)
+
+            for l in filter(lambda x:(x.dep_=='appos'),eachSent):
+                if l.head.ent_type_ in ['GPE','LOC'] and l.ent_type_ in ['GPE','LOC']:
+                    print(l.head,l)
+
+
+        # for eachSent in doc.sents:
+        #     smallLoc = []
+        #     bigLoc = []
+        #     leftSub = None
+        #     rightSub = None
+        #     for token in eachSent:
+        #         if token.head.lemma_=='be' and token.dep_=='advcl':
+        #             leftSub = token.subtree
+        #         elif token.head.lemma_=='be' and token.dep_.find('nsubj')>=0:
+        #             leftSub = token.subtree
+        #         elif token.head.lemma_=='be' and token.dep_=='attr':
+        #             rightSub = token.subtree
+        #     # print(list(leftSub))
+        #     # print(list(rightSub))
+        #     if leftSub and rightSub:
+        #         for token in leftSub:
+        #             # print(token)
+        #             if token.pos_=='PROPN' and (token.ent_type_=="GPE" or token.ent_type_=="LOC"):
+        #                 smallLoc.append(token)
+        #                 # print(rightSub)
+        #         for token in rightSub:
+        #             # print(token)
+        #             if token.pos_ == 'PROPN' and token.dep_=='pobj' and (token.ent_type_=="GPE" or token.ent_type_=="ORG" or token.ent_type_=="LOC"):
+        #                 bigLoc.append(token)
+        #                 for i in token.conjuncts:
+        #                     bigLoc.append(i)
+        #                 # if smallLoc and bigLoc:
+        #     if smallLoc and bigLoc:
+        #         print(smallLoc,bigLoc)
+        #         print(smallLoc[0].sent)
 
             # Located at ...
 
@@ -253,55 +280,6 @@ class Solution:
         # self.extract_currency_relations_work_verb(doc)
         self.extract_currency_relations_part_of(doc)
 
-
-            # break
-        # matcher = Matcher(self.nlp.vocab,validate=True)
-        #
-        # for tok in doc[:5]:
-        #     print(tok.text, "-->", tok.dep_, "-->", tok.pos_,"-->",tok.ent_type_)
-        # pattern1 = [{'ENT_TYPE': 'ORG'},
-        #            {'LEMMA': {"IN":["buy","acquire","sell"]}},
-        #            {'ENT_TYPE': 'ORG'}]
-
-        # pattern2 = [{'ENT_TYPE': 'ORG'},
-        #            {'LEMMA': {"IN":["buy","acquire","sell"]}},
-        #            {'ENT_TYPE': 'ORG'}]
-
-        # matcher.add("CompanyOwn",self.collect_sents,pattern1)
-        #
-        # matches = matcher(doc)
-        # for match_id, start, end in matches:
-        #     string_id = self.nlp.vocab.strings[match_id]  # Get string representation
-        #     span = doc[start:end]  # The matched span
-        #     print(match_id, string_id, start, end, span.text)
-
-        # wordSet = set()
-        # relations = []
-        # for word in filter(lambda w: w.pos_=="VERB" or w.pos_=="NOUN", doc):
-        #     # print(word)
-        #     similarWords = ["acquire","buy","purchase"]
-        #     for sigleSimilarWords in similarWords:
-        #         # print(word)
-        #         if nlp(word.lemma_).similarity(nlp(sigleSimilarWords))>0.7:
-        #             wordSet.add(word)
-        # print(wordSet)
-        # for word in wordSet:
-        #     # print(word.head)
-        #     childs = word.children
-        #     # print(list(childs))
-        #     print(childs.__class__)
-        #     dobj = []
-        #     nsubj = []
-        #     for possible in word.children:
-        #         print(possible)
-        #         if possible.dep_ == "nsubj" and (possible.ent_type_ =="ORG" or possible.pos_=="PRON"):
-        #             nsubj.append(possible)
-        #         elif possible.dep_=='dobj' and (possible.ent_type_ =="ORG" or possible.pos_=="PRON"):
-        #             dobj.append(possible)
-        #     for i in dobj:
-        #         for j in nsubj:
-        #             relations.append((j,word,i))
-        # return relations
     def lemmatize(self,tokens):
         lemmaArr = []
         for token in tokens:
@@ -315,8 +293,8 @@ class Solution:
         # file = open("WikipediaArticles/Amazon_com.txt")
         # file = open("WikipediaArticles/IBM.txt")
         # file = open("WikipediaArticles/AppleInc.txt")
-        # file = open("WikipediaArticles/Dallas.txt")
-        file = open("test.txt")
+        file = open("WikipediaArticles/Dallas.txt")
+        # file = open("test.txt")
 
         fl = file.read()
         sentences = nltk.sent_tokenize(fl) # Split the document into sentences
@@ -325,19 +303,14 @@ class Solution:
         pos_tag = [nltk.pos_tag(token) for token in lemmaArr] # Part-of-speech (POS) tag the words to extract POS tag features
 
         doc = self.nlp(fl)
-        # doc = nlp("Amazon acquired Whole Foods Market for US$13.4 billion.")
         relations = self.extract_currency_relations(doc)
 
-        # print(relations)
-        #
-        # # labels = [x.label_ for x in doc.ents]
-        # # print(Counter(labels))
         html = displacy.render(doc,style='dep',page=True)
         outputfile = open('dep.html',"w",encoding='utf-8')
         outputfile.write(html)
-        #
+
         html2 = displacy.render(doc,style='ent',page=True)
-        # html2= displacy.render(self.matched_sents, style="ent", manual=True)
+        
         outputfile2 = open('ent.html',"w",encoding='utf-8')
         outputfile2.write(html2)
 if __name__=='__main__':
