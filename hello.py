@@ -44,7 +44,7 @@ class Solution:
         print(entity.text)
         # self.matched_sents.append({"text": sent.text, "ents": match_ents})
 
-    def extract_currency_relations_by_verb(self,doc):
+    def extract_currency_relations_buy_by_verb(self,doc):
         allVerb = [token for token in doc if token.pos_ == "VERB"]
         similarWordForBuy = ["buy", "acquire","purchase"]
         buyWord = set()
@@ -91,7 +91,7 @@ class Solution:
                         arguments["price"] = str(list(each.rights)[0])
             thisextraction = {"template":'Buy',"sentence":str(eachVerb.sent),"arguments":arguments}
             self.extraction.append(thisextraction)
-    def extract_currency_relations_by_noun(self,doc):
+    def extract_currency_relations_buy_by_noun(self,doc):
         allNoun = [token for token in doc if token.pos_ == "NOUN"]
         similarWordForAcquisition = ["acquisition"]
         AcquisitionNoun = []
@@ -176,28 +176,38 @@ class Solution:
         for eachSent in doc.sents:
             smallLoc = []
             bigLoc = []
+            arguments = dict()
             leftSub = None
             rightSub = None
             for token in eachSent:
                 if token.head.dep_=='ROOT' and token.dep_.find('nsubj')>=0 and (token.ent_type_=="GPE" or token.ent_type_=="LOC"):
-                    smallLoc.append(token)
+                    smallLoc.append(str(token))
                 elif token.pos_ == 'PROPN' and token.dep_=='pobj' and (token.ent_type_=="GPE" or token.ent_type_=="ORG" or token.ent_type_=="LOC"):
-                    bigLoc.append(token)
+                    bigLoc.append(str(token))
                 elif token.dep_=='punct' and (token.ent_type == 'GPE' or token.ent_type == 'LOC'):
-                    bigLoc.append(token)
+                    bigLoc.append(str(token))
             if smallLoc:
-                print(smallLoc,bigLoc)
-                print(smallLoc[0].sent)
+                arguments['smallLoc'] = ','.join(smallLoc)
+                arguments['bigLoc'] = ','.join(bigLoc)
+                thisextraction = {"template": 'Location', "sentence": str(eachSent), "arguments": arguments}
+                self.extraction.append(thisextraction)
 
+            arguments = dict()
             for l in filter(lambda x:(x.pos_=='ADP'),eachSent):
                 # print(l)
                 if (l.nbor(-1).ent_type_ in ['GPE','LOC'] or l.nbor(-1).pos_=='PROPN') and (l.right_edge.ent_type_ in ['GPE','LOC']):
-                    print((l.nbor(-1),l.right_edge))
-                    print(l.sent)
+                    arguments['smallLoc']=str((l.nbor(-1)))
+                    arguments['bigLoc'] = str(l.right_edge)
+                    thisextraction = {"template": 'Location', "sentence": str(eachSent), "arguments": arguments}
+                    self.extraction.append(thisextraction)
 
+            arguments = dict()
             for l in filter(lambda x:(x.dep_=='appos'),eachSent):
                 if l.head.ent_type_ in ['GPE','LOC'] and l.ent_type_ in ['GPE','LOC']:
-                    print(l.head,l)
+                    arguments['smallLoc']=str((l.head))
+                    arguments['bigLoc'] = str(l)
+                    thisextraction = {"template": 'Location', "sentence": str(eachSent), "arguments": arguments}
+                    self.extraction.append(thisextraction)
 
         # for eachSent in doc.sents:
         #     smallLoc = []
@@ -243,8 +253,8 @@ class Solution:
             for span in spans:
                 retokenizer.merge(span)
 
-        self.extract_currency_relations_by_verb(doc)
-        self.extract_currency_relations_by_noun(doc)
+        self.extract_currency_relations_buy_by_verb(doc)
+        self.extract_currency_relations_buy_by_noun(doc)
         self.extract_currency_relations_work_verb(doc)
         self.extract_currency_relations_part_of(doc)
 
@@ -258,7 +268,7 @@ class Solution:
         return lemmaArr;
 
     def main(self):
-        self.file = open("WikipediaArticles/Amazon_com.txt")
+        self.file = open("Amazon_com_coref.txt")
         # file = open("WikipediaArticles/IBM.txt")
         # file = open("WikipediaArticles/AppleInc.txt")
         # self.file = open("WikipediaArticles/Dallas.txt")
