@@ -1,0 +1,1 @@
+{"buyer": "Dallas billionaire and entrepreneur Comer Cottrell, Jr.", "item": "the campus", "price": "None"}{"buyer": "Dallas", "item": "36 acres", "price": "None"}{"buyer": "Belo", "item": "it", "price": "None"}{"buyer": "Dallas Mavericks owner", "item": "land", "price": "None"}

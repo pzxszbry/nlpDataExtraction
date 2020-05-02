@@ -1,5 +1,6 @@
 import spacy
 import nltk
+import json
 from collections import Counter
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet as wn
@@ -11,7 +12,9 @@ class Solution:
 
     nlp = spacy.load("en_core_web_md")
     matched_sents = []
-
+    outputjson = None
+    file = None
+    extraction = []
     def filter_spans(self,spans):
         # Filter a sequence of spans so they don't contain overlaps
         # For spaCy 2.1.4+: this function is available as spacy.util.filter_spans()
@@ -26,15 +29,11 @@ class Solution:
             seen_tokens.update(range(span.start, span.end))
         result = sorted(result, key=lambda span: span.start)
         return result
-    #     return relations
 
     def collect_sents(self,matcher, doc, i, matches):
         match_id, start, end = matches[i]
         span = doc[start:end]  # Matched span
         sent = span.sent  # Sentence containing matched span
-        # Append mock entity for match in displaCy style to matched_sents
-        # get the match span by ofsetting the start and end of the span with the
-        # start and end of the sentence in the doc
         match_ents = [{
             "start": span.start_char - sent.start_char,
             "end": span.end_char - sent.start_char,
@@ -48,7 +47,6 @@ class Solution:
     def extract_currency_relations_by_verb(self,doc):
         allVerb = [token for token in doc if token.pos_ == "VERB"]
         similarWordForBuy = ["buy", "acquire","purchase"]
-        # wn.synset('buy.v.01').lemma_names()
         buyWord = set()
         for eachVerb in allVerb:
             for similarWord in similarWordForBuy:
@@ -60,40 +58,39 @@ class Solution:
                 # find dependency tag that contains the text "subjpass"
                 if tok.dep_.find("subjpass") == True:
                     subjpass = 1
-            buyer = None
-            beBought = None
-            money = None
+
+            arguments = dict();
             if subjpass == 0:
                 for each in eachVerb.children:
                     if each.dep_ == "nsubj":
-                        buyer = each
+                        arguments["buyer"] = str(each)
                     elif each.dep_ == 'dobj':
                         # print(list(each.rights)[])
                         if list(each.rights) and list(each.rights)[0].pos_=="SCONJ":
                             beBought = list(list(each.rights)[0].rights)[0]
-                            beBought = (beBought,beBought.conjuncts)
+                            arguments["item"] = str(beBought,beBought.conjuncts)
                         else:
-                            beBought = each
+                            arguments["item"] = str(each)
+
                     elif each.dep_ == "prep" and list(each.rights)[0].ent_type_ == "MONEY":
-                        money = list(each.rights)[0]
+                        arguments["price"] = str(list(each.rights)[0])
                         # print(money)
-                print((buyer, beBought, money))
-                print(eachVerb.sent)
+
+                # arguments = {"buyer":str(buyer),"item":str(beBought),"price":str(money)}
+                # thisextraction = {"template":'Buy',"sentence":str(eachVerb.sent),"arguments":arguments}
+                # self.extraction.append(thisextraction)
             else:
-                # print(list(childs))
                 for each in eachVerb.children:
-                    # print(each.dep_+"haha")
                     if each.dep_ == "nsubjpass":
-                        beBought = each
+                        arguments["item"] = str(each)
                     elif each.dep_ == "agent":
                         for possible_noun in each.rights:
                             if possible_noun.pos_ == "PROPN" or possible_noun.ent_type_ == "ORG":
-                                buyer = possible_noun
+                                arguments["buyer"] = str(possible_noun)
                     elif each.dep_ == "prep" and list(each.rights)[0].ent_type_ == "MONEY":
-                        money = list(each.rights)[0]
-                print((buyer, beBought, money))
-                print(eachVerb.sent)
-                # print(doc[buyer.start_char:money.end_char+1])
+                        arguments["price"] = str(list(each.rights)[0])
+            thisextraction = {"template":'Buy',"sentence":str(eachVerb.sent),"arguments":arguments}
+            self.extraction.append(thisextraction)
     def extract_currency_relations_by_noun(self,doc):
         allNoun = [token for token in doc if token.pos_ == "NOUN"]
         similarWordForAcquisition = ["acquisition"]
@@ -102,46 +99,37 @@ class Solution:
             for similarWord in similarWordForAcquisition:
                 if self.nlp(eachNoun.lemma_).similarity(self.nlp(similarWord)) > 0.6:
                     AcquisitionNoun.append(eachNoun)
-        # print(AcquisitionNoun)
         for eachNoun in AcquisitionNoun:
             mydoc = eachNoun.sent
-            # print(mydoc)
-            buyer = None
-            beBought = None
-            money = None
+            # buyer = None
+            # beBought = None
+            # money = None
+            arguments = dict()
             for i in mydoc:
                 if i.lemma_=="include":
                     for childs in i.lefts:
                         if childs.dep_=='nsubj':
-                            buyer = childs
+                            arguments['buyer'] = str(childs)
                     for childs in i.rights:
                         if childs.pos_=="PROPN":
-                            beBought = (childs,childs.conjuncts)
-                            print((buyer,beBought,money))
-                            print(mydoc)
+                            arguments['item'] = str(childs)+str(childs.conjuncts)
                 elif i.lemma_ == "between":
-
                     for childs in i.rights:
                         if childs.dep_ == 'pobj':
-                            buyer = childs
-                            beBought = childs.conjuncts
-                            print((buyer,beBought,money))
-                            print(mydoc)
+                            arguments['buyer'] = str(childs)
+                            arguments['item'] = str(childs.conjuncts)
+            thisextraction = {"template": 'Buy', "sentence": str(eachNoun.sent), "arguments": arguments}
+            self.extraction.append(thisextraction)
 
     def extract_currency_relations_work_verb(self,doc):
         def preprocessPosition():
             matcher = Matcher(self.nlp.vocab)
-            #
-            # for tok in doc[:5]:
-            #     print(tok.text, "-->", tok.dep_, "-->", tok.pos_,"-->",tok.ent_type_)
             pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
-            # try to figure out better way to do it later.
-
             matcher.add("Position",self.collect_sents,pattern)
-            matches = matcher(doc)
-            for match_id, start, end in matches:
-                string_id = self.nlp.vocab.strings[match_id]  # Get string representation
-                span = doc[start:end]  # The matched span
+            # matches = matcher(doc)
+            # for match_id, start, end in matches:
+            #     string_id = self.nlp.vocab.strings[match_id]  # Get string representation
+            #     span = doc[start:end]  # The matched span
         preprocessPosition()
 
         for eachSen in doc.sents:
@@ -176,24 +164,6 @@ class Solution:
                         Location.append(token)
             if Person:
                 print((Person,Position,Location,Organization))
-        # for person in filter(lambda w: w.ent_type_ == "PERSON", doc):
-        #     if person.dep_ in ("nsubj"):
-        #         print(person.sent)
-        #         print(list(person.head.rights))
-        #         if person.head.lemma_=='be':
-        #             subject = [w for w in person.head.rights if w.pos_ == "NOUN"]# w.ent_type =="POSITION"
-        #             print(subject)
-        #             Person_Position_relations.append((person,subject))
-        #         elif person.head.pos_=="VERB" and person.head.lemma_=="work":
-        #             prop = [w for w in person.head.rights if w.pos_=="SCONJ" and w.dep_=="prep"]
-        #             print(prop)
-        #             if prop:
-        #                 prop = prop[0]
-        #                 position = [p for p in prop.rights if p.dep_=="pobj"]
-        #                 Person_Position_relations.append((person,position))
-        #                 # print(list(position))
-        # print(Person_Position_relations)
-
         Person_Organization_relations = []
 
             #     if subject:
@@ -229,7 +199,6 @@ class Solution:
             for l in filter(lambda x:(x.dep_=='appos'),eachSent):
                 if l.head.ent_type_ in ['GPE','LOC'] and l.ent_type_ in ['GPE','LOC']:
                     print(l.head,l)
-
 
         # for eachSent in doc.sents:
         #     smallLoc = []
@@ -275,9 +244,9 @@ class Solution:
             for span in spans:
                 retokenizer.merge(span)
 
-        # self.extract_currency_relations_by_verb(doc)
-        # self.extract_currency_relations_by_noun(doc)
-        # self.extract_currency_relations_work_verb(doc)
+        self.extract_currency_relations_by_verb(doc)
+        self.extract_currency_relations_by_noun(doc)
+        self.extract_currency_relations_work_verb(doc)
         self.extract_currency_relations_part_of(doc)
 
     def lemmatize(self,tokens):
@@ -290,13 +259,14 @@ class Solution:
         return lemmaArr;
 
     def main(self):
-        # file = open("WikipediaArticles/Amazon_com.txt")
+        self.file = open("WikipediaArticles/Amazon_com.txt")
         # file = open("WikipediaArticles/IBM.txt")
         # file = open("WikipediaArticles/AppleInc.txt")
-        file = open("WikipediaArticles/Dallas.txt")
+        # self.file = open("WikipediaArticles/Dallas.txt")
+        self.outputjson = open("outputjson.json","w")
         # file = open("test.txt")
 
-        fl = file.read()
+        fl = self.file.read()
         sentences = nltk.sent_tokenize(fl) # Split the document into sentences
         tokens = [nltk.word_tokenize(sentence) for sentence in sentences] # Tokenize the sentences into words
         lemmaArr = self.lemmatize(tokens)  # Lemmatize the words to extract lemmas as features
@@ -310,9 +280,12 @@ class Solution:
         outputfile.write(html)
 
         html2 = displacy.render(doc,style='ent',page=True)
-        
+
         outputfile2 = open('ent.html',"w",encoding='utf-8')
         outputfile2.write(html2)
+
+        mydict = {"document":self.file.name,"extraction":self.extraction}
+        self.outputjson.write(json.dumps(mydict))
 if __name__=='__main__':
     s = Solution()
     s.main();
