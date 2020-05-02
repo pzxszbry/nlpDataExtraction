@@ -21,7 +21,7 @@ files= os.listdir(root_path)
 # file_path = 'WikipediaArticles\AppleInc.txt'
 
 para_coref_list = list()
-for file in files[18:]:
+for file in files:
     if os.path.isfile(os.path.join(root_path, file)):
         file_path = os.path.join(root_path, file)
         file_name = os.path.splitext(file)[0]
