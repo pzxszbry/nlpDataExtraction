@@ -133,6 +133,7 @@ class Solution:
         preprocessPosition()
 
         for eachSen in doc.sents:
+            arguments = dict()
             Person = None
             Position = []
             Location = []
@@ -145,32 +146,30 @@ class Solution:
             if subjpass ==0:
                 for token in eachSen:
                     if (token.dep_ =='nsubj' or token.dep_ =='ROOT') and token.ent_type_=='PERSON':
-                        Person = token
+                        Person = str(token)
                     elif (token.dep_=='pobj' or token.dep_=='attr' or token.dep_=='appos' or token.dep_=='conj') and token.ent_type_=='POSITION':
-                        Position.append(token)
+                        Position.append(str(token))
                     elif token.ent_type_=='GPE':
-                        Location.append(token)
+                        Location.append(str(token))
                     elif token.ent_type_=='ORG':
-                        Organization.append(token)
+                        Organization.append(str(token))
             else:
                 for token in eachSen:
                     if (token.dep_ =='nsubjpass') and token.ent_type_=='ORG':
-                        Organization.append(token)
+                        Organization.append(str(token))
                     elif (token.dep_=='pobj') and token.ent_type_=='PERSON':
-                        Person = token
+                        Person = str(token)
                     elif token.ent_type_=='POSITION':
-                        Position.append(token)
+                        Position.append(str(token))
                     elif token.ent_type_=='GPE':
-                        Location.append(token)
+                        Location.append(str(token))
             if Person:
-                print((Person,Position,Location,Organization))
-        Person_Organization_relations = []
-
-            #     if subject:
-            #         subject = subject[0]
-            #         relations.append((subject, money))
-            # elif money.dep_ == "pobj" and money.head.dep_ == "prep":
-            #     relations.append((money.head.head, money))
+                arguments['person'] = Person
+                arguments['organization'] = ','.join(Organization)
+                arguments['Position'] = ','.join(Position)
+                arguments['Location'] = ','.join(Location)
+                thisextraction = {"template": 'Work', "sentence": str(eachSen), "arguments": arguments}
+                self.extraction.append(thisextraction)
         return
 
     def extract_currency_relations_part_of(self,doc):
