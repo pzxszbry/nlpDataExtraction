@@ -132,9 +132,9 @@ class Solution:
         def preprocessPosition():
             matcher = Matcher(self.nlp.vocab)
             #
-            for tok in doc[:5]:
-                print(tok.text, "-->", tok.dep_, "-->", tok.pos_,"-->",tok.ent_type_)
-            pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
+            # for tok in doc[:5]:
+            #     print(tok.text, "-->", tok.dep_, "-->", tok.pos_,"-->",tok.ent_type_)
+            pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
             # try to figure out better way to do it later.
 
             matcher.add("Position",self.collect_sents,pattern)
@@ -143,41 +143,106 @@ class Solution:
                 string_id = self.nlp.vocab.strings[match_id]  # Get string representation
                 span = doc[start:end]  # The matched span
         preprocessPosition()
+        Person_Position_relations = []
+
+        for eachSen in doc.sents:
+            Person = None
+            Position = []
+            Location = []
+            Organization = None
+
+            subjpass = 0
+            for tok in eachSen:
+                # find dependency tag that contains the text "subjpass"
+                if tok.dep_.find("subjpass") == True:
+                    subjpass = 1
+            if subjpass ==0:
+                for token in eachSen:
+                    if (token.dep_ =='nsubj' or token.dep_ =='ROOT') and token.ent_type_=='PERSON':
+                        Person = token
+                    elif (token.dep_=='pobj' or token.dep_=='attr' or token.dep_=='appos' or token.dep_=='conj') and token.ent_type_=='POSITION':
+                        Position.append(token)
+                    elif token.ent_type_=='GPE':
+                        Location.append(token)
+                    elif token.ent_type_=='ORG':
+                        Organization = token
+            else:
+                for token in eachSen:
+                    if (token.dep_ =='nsubjpass') and token.ent_type_=='ORG':
+                        Organization = token
+                    elif (token.dep_=='pobj') and token.ent_type_=='PERSON':
+                        Person = token
+                    elif token.ent_type_=='POSITION':
+                        Position.append(token)
+                    elif token.ent_type_=='GPE':
+                        Location.append(token)
+            if Person:
+                print((Person,Position,Location,Organization))
+
+
+
+
+        # for person in filter(lambda w: w.ent_type_ == "PERSON", doc):
+        #     if person.dep_ in ("nsubj"):
+        #         print(person.sent)
+        #         print(list(person.head.rights))
+        #         if person.head.lemma_=='be':
+        #             subject = [w for w in person.head.rights if w.pos_ == "NOUN"]# w.ent_type =="POSITION"
+        #             print(subject)
+        #             Person_Position_relations.append((person,subject))
+        #         elif person.head.pos_=="VERB" and person.head.lemma_=="work":
+        #             prop = [w for w in person.head.rights if w.pos_=="SCONJ" and w.dep_=="prep"]
+        #             print(prop)
+        #             if prop:
+        #                 prop = prop[0]
+        #                 position = [p for p in prop.rights if p.dep_=="pobj"]
+        #                 Person_Position_relations.append((person,position))
+        #                 # print(list(position))
+        # print(Person_Position_relations)
+
+        Person_Organization_relations = []
+
+            #     if subject:
+            #         subject = subject[0]
+            #         relations.append((subject, money))
+            # elif money.dep_ == "pobj" and money.head.dep_ == "prep":
+            #     relations.append((money.head.head, money))
+        return Person_Position_relations
         # AllSent = set()
         # for entity in doc.ents:
         #     if entity.label_=='POSITION':
         #         AllSent.add(entity.sent)
-        for eachSent in doc.sents:
-            org = []
-            per = []
-            posit = []
-            location = []
-            for ent in eachSent:
-                # print(ent.ent_type_)
-                if ent.ent_type_=="ORG":
-                    org.append(ent)
-                elif ent.ent_type_=="PERSON":
-                    per.append(ent)
-                elif  ent.ent_type_ == "POSITION":
-                    posit.append(ent)
-                elif ent.ent_type_ == "GPE":
-                    location.append(ent)
-            if not org:
-                for k in posit:
-                    for j in per:
-                        print((j,k))
-                        print(eachSent)
-            elif not posit:
-                for i in org:
-                    for j in per:
-                        print((i,j))
-                        print(eachSent)
-            else:
-                for k in posit:
-                    for j in per:
-                        for i in org:
-                            print((i,j,k))
-                            print(eachSent)
+        # for eachSent in doc.sents:
+        #     org = []
+        #     per = []
+        #     posit = []
+        #     location = []
+        #     for ent in eachSent:
+        #         # print(ent.ent_type_)
+        #         if ent.ent_type_=="ORG":
+        #             org.append(ent)
+        #         elif ent.ent_type_=="PERSON":
+        #             per.append(ent)
+        #         elif  ent.ent_type_ == "POSITION":
+        #             posit.append(ent)
+        #         elif ent.ent_type_ == "GPE":
+        #             location.append(ent)
+        #     if not org:
+        #         for k in posit:
+        #             for j in per:
+        #                 print((j,k))
+        #                 print(eachSent)
+        #     elif not posit:
+        #         for i in org:
+        #             for j in per:
+        #                 print((i,j))
+        #                 print(eachSent)
+        #     else:
+        #         for k in posit:
+        #             for j in per:
+        #                 for i in org:
+        #                     print((i,j,k))
+        #                     print(eachSent)
 
     def extract_currency_relations(self,doc):
         spans = list(doc.ents) + list(doc.noun_chunks)
