@@ -8,6 +8,7 @@ from spacy import displacy
 from spacy.matcher import Matcher
 lemmatizer = WordNetLemmatizer()
 from spacy.tokens import Span
+from spacy.pipeline import EntityRuler
 class Solution:
 
     nlp = spacy.load("en_core_web_md")
@@ -124,13 +125,17 @@ class Solution:
     def extract_currency_relations_work_verb(self,doc):
         def preprocessPosition():
             matcher = Matcher(self.nlp.vocab)
-            pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
-            matcher.add("Position",self.collect_sents,pattern)
+            pattern = [{'POS': 'DET', 'OP': '?'},
+                       {'POS': 'ADJ', 'OP': '?'},
+                       {'LEMMA': {"IN": ["ceo","chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
+            # pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
+            ruler.add_patterns(patterns)
+            self.nlp.add_pipe(ruler)
             # matches = matcher(doc)
             # for match_id, start, end in matches:
             #     string_id = self.nlp.vocab.strings[match_id]  # Get string representation
             #     span = doc[start:end]  # The matched span
-        preprocessPosition()
+        # preprocessPosition()
 
         for eachSen in doc.sents:
             arguments = dict()
@@ -268,10 +273,11 @@ class Solution:
         return lemmaArr;
 
     def main(self):
-        self.file = open("Amazon_com_coref.txt")
+        self.file = open("AppleInc_coref.txt")
         # file = open("WikipediaArticles/IBM.txt")
         # file = open("WikipediaArticles/AppleInc.txt")
         # self.file = open("WikipediaArticles/Dallas.txt")
+        # self.file = open("test.txt")
         self.outputjson = open("outputjson.json","w")
         # file = open("test.txt")
 
@@ -281,8 +287,25 @@ class Solution:
         lemmaArr = self.lemmatize(tokens)  # Lemmatize the words to extract lemmas as features
         pos_tag = [nltk.pos_tag(token) for token in lemmaArr] # Part-of-speech (POS) tag the words to extract POS tag features
 
+
+
+        ruler = EntityRuler(self.nlp,overwrite_ents=True)
+        patterns1 = [{"label": "GPE", "pattern": "Richardson"}]
+        patterns2 = [{"label":"POSITION","pattern":[{'POS': 'DET', 'OP': '?'},
+                   {'POS': 'ADJ', 'OP': '*'},
+                   {'LEMMA': {
+                       "IN": ["ceo", "chief executive officer", "the chairman", "co-founder", "ceo", "former ceo",
+                              "former president", "president", "chairman", "former chairman", "Group President",
+                              "partner", "dean"]}}]}
+                    ]
+        # pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
+        ruler.add_patterns(patterns1)
+        ruler.add_patterns(patterns2)
+        self.nlp.add_pipe(ruler)
         doc = self.nlp(fl)
+        print([(ent.text, ent.label_) for ent in doc.ents])
         relations = self.extract_currency_relations(doc)
+        # print([(ent.text, ent.label_) for ent in doc.ents])
 
         html = displacy.render(doc,style='dep',page=True)
         outputfile = open('dep.html',"w",encoding='utf-8')
