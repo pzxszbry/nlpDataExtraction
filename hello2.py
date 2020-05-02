@@ -15,7 +15,7 @@ def article_to_paraList(filePath):
 
 ####################################################################
 
-file_path = 'test2.txt'
+file_path = 'WikipediaArticles\Amazon_com.txt'
 
 para_list = article_to_paraList(file_path)
 
@@ -23,8 +23,12 @@ para_coref_list = list()
 
 for para in para_list:
     doc = nlp(para)
-    print(para)
+    # print(para)
     # print(doc._.coref_resolved)
-    doc = nlp(doc._.coref_resolved)
-    for sent in doc.sents:
-        print(sent)
+    # doc = nlp(doc._.coref_resolved)
+    # for sent in doc.sents:
+    #     print(sent)
+    para_coref_list.append(doc._.coref_resolved)
+
+out = open('Amazon_com_coref.txt',"w",encoding='utf-8')
+out.write('\n\n'.join(para_coref_list))
