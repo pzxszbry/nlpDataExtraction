@@ -2,9 +2,11 @@ import spacy
 import nltk
 from collections import Counter
 from nltk.stem import WordNetLemmatizer
+from nltk.corpus import wordnet as wn
 from spacy import displacy
 from spacy.matcher import Matcher
 lemmatizer = WordNetLemmatizer()
+from spacy.tokens import Span
 class Solution:
 
     nlp = spacy.load("en_core_web_md")
@@ -36,40 +38,212 @@ class Solution:
         match_ents = [{
             "start": span.start_char - sent.start_char,
             "end": span.end_char - sent.start_char,
-            "label": "MATCH",
+            "label": "POSITION",
         }]
-        self.matched_sents.append({"text": sent.text, "ents": match_ents})
+        entity = Span(doc, start, end, label="POSITION")
+        doc.ents += (entity,)
+        print(entity.text)
+        # self.matched_sents.append({"text": sent.text, "ents": match_ents})
 
-    def subtree_matcher(doc):
-        subjpass = 0
-
-        for i, tok in enumerate(doc):
-            # find dependency tag that contains the text "subjpass"
-            if tok.dep_.find("subjpass") == True:
-                subjpass = 1
-
-        x = ''
-        y = ''
-
-        # if subjpass == 1 then sentence is passive
-        if subjpass == 1:
-            for i, tok in enumerate(doc):
+    def extract_currency_relations_by_verb(self,doc):
+        allVerb = [token for token in doc if token.pos_ == "VERB"]
+        similarWordForBuy = ["buy", "acquire","purchase"]
+        # wn.synset('buy.v.01').lemma_names()
+        buyWord = set()
+        for eachVerb in allVerb:
+            for similarWord in similarWordForBuy:
+                if self.nlp(eachVerb.lemma_).similarity(self.nlp(similarWord)) > 0.8:
+                    buyWord.add(eachVerb)
+        for eachVerb in buyWord:
+            subjpass = 0
+            for tok in eachVerb.children:
+                # find dependency tag that contains the text "subjpass"
                 if tok.dep_.find("subjpass") == True:
-                    y = tok.text
+                    subjpass = 1
+            buyer = None
+            beBought = None
+            money = None
+            if subjpass == 0:
+                for each in eachVerb.children:
+                    if each.dep_ == "nsubj":
+                        buyer = each
+                    elif each.dep_ == 'dobj':
+                        # print(list(each.rights)[])
+                        if list(each.rights) and list(each.rights)[0].pos_=="SCONJ":
+                            beBought = list(list(each.rights)[0].rights)[0]
+                            beBought = (beBought,beBought.conjuncts)
+                        else:
+                            beBought = each
+                    elif each.dep_ == "prep" and list(each.rights)[0].ent_type_ == "MONEY":
+                        money = list(each.rights)[0]
+                        # print(money)
+                print((buyer, beBought, money))
+                print(eachVerb.sent)
+            else:
+                # print(list(childs))
+                for each in eachVerb.children:
+                    # print(each.dep_+"haha")
+                    if each.dep_ == "nsubjpass":
+                        beBought = each
+                    elif each.dep_ == "agent":
+                        for possible_noun in each.rights:
+                            if possible_noun.pos_ == "PROPN" or possible_noun.ent_type_ == "ORG":
+                                buyer = possible_noun
+                    elif each.dep_ == "prep" and list(each.rights)[0].ent_type_ == "MONEY":
+                        money = list(each.rights)[0]
+                print((buyer, beBought, money))
+                print(eachVerb.sent)
+                # print(doc[buyer.start_char:money.end_char+1])
+    def extract_currency_relations_by_noun(self,doc):
+        allNoun = [token for token in doc if token.pos_ == "NOUN"]
+        similarWordForAcquisition = ["acquisition"]
+        AcquisitionNoun = []
+        for eachNoun in allNoun:
+            for similarWord in similarWordForAcquisition:
+                if self.nlp(eachNoun.lemma_).similarity(self.nlp(similarWord)) > 0.6:
+                    AcquisitionNoun.append(eachNoun)
+        # print(AcquisitionNoun)
+        for eachNoun in AcquisitionNoun:
+            mydoc = eachNoun.sent
+            # print(mydoc)
+            buyer = None
+            beBought = None
+            money = None
+            for i in mydoc:
+                if i.lemma_=="include":
+                    for childs in i.lefts:
+                        if childs.dep_=='nsubj':
+                            buyer = childs
+                    for childs in i.rights:
+                        if childs.pos_=="PROPN":
+                            beBought = (childs,childs.conjuncts)
+                            print((buyer,beBought,money))
+                            print(mydoc)
+                elif i.lemma_ == "between":
 
-                if tok.dep_.endswith("obj") == True:
-                    x = tok.text
+                    for childs in i.rights:
+                        if childs.dep_ == 'pobj':
+                            buyer = childs
+                            beBought = childs.conjuncts
+                            print((buyer,beBought,money))
+                            print(mydoc)
 
-        # if subjpass == 0 then sentence is not passive
-        else:
-            for i, tok in enumerate(doc):
-                if tok.dep_.endswith("subj") == True:
-                    x = tok.text
+    def extract_currency_relations_work_verb(self,doc):
+        def preprocessPosition():
+            matcher = Matcher(self.nlp.vocab)
+            #
+            # for tok in doc[:5]:
+            #     print(tok.text, "-->", tok.dep_, "-->", tok.pos_,"-->",tok.ent_type_)
+            pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
+            # try to figure out better way to do it later.
 
-                if tok.dep_.endswith("obj") == True:
-                    y = tok.text
+            matcher.add("Position",self.collect_sents,pattern)
+            matches = matcher(doc)
+            for match_id, start, end in matches:
+                string_id = self.nlp.vocab.strings[match_id]  # Get string representation
+                span = doc[start:end]  # The matched span
+        preprocessPosition()
+        Person_Position_relations = []
 
-        return x, y
+        for eachSen in doc.sents:
+            Person = None
+            Position = []
+            Location = []
+            Organization = None
+
+            subjpass = 0
+            for tok in eachSen:
+                # find dependency tag that contains the text "subjpass"
+                if tok.dep_.find("subjpass") == True:
+                    subjpass = 1
+            if subjpass ==0:
+                for token in eachSen:
+                    if (token.dep_ =='nsubj' or token.dep_ =='ROOT') and token.ent_type_=='PERSON':
+                        Person = token
+                    elif (token.dep_=='pobj' or token.dep_=='attr' or token.dep_=='appos' or token.dep_=='conj') and token.ent_type_=='POSITION':
+                        Position.append(token)
+                    elif token.ent_type_=='GPE':
+                        Location.append(token)
+                    elif token.ent_type_=='ORG':
+                        Organization = token
+            else:
+                for token in eachSen:
+                    if (token.dep_ =='nsubjpass') and token.ent_type_=='ORG':
+                        Organization = token
+                    elif (token.dep_=='pobj') and token.ent_type_=='PERSON':
+                        Person = token
+                    elif token.ent_type_=='POSITION':
+                        Position.append(token)
+                    elif token.ent_type_=='GPE':
+                        Location.append(token)
+            if Person:
+                print((Person,Position,Location,Organization))
+
+
+
+
+        # for person in filter(lambda w: w.ent_type_ == "PERSON", doc):
+        #     if person.dep_ in ("nsubj"):
+        #         print(person.sent)
+        #         print(list(person.head.rights))
+        #         if person.head.lemma_=='be':
+        #             subject = [w for w in person.head.rights if w.pos_ == "NOUN"]# w.ent_type =="POSITION"
+        #             print(subject)
+        #             Person_Position_relations.append((person,subject))
+        #         elif person.head.pos_=="VERB" and person.head.lemma_=="work":
+        #             prop = [w for w in person.head.rights if w.pos_=="SCONJ" and w.dep_=="prep"]
+        #             print(prop)
+        #             if prop:
+        #                 prop = prop[0]
+        #                 position = [p for p in prop.rights if p.dep_=="pobj"]
+        #                 Person_Position_relations.append((person,position))
+        #                 # print(list(position))
+        # print(Person_Position_relations)
+
+        Person_Organization_relations = []
+
+            #     if subject:
+            #         subject = subject[0]
+            #         relations.append((subject, money))
+            # elif money.dep_ == "pobj" and money.head.dep_ == "prep":
+            #     relations.append((money.head.head, money))
+        return Person_Position_relations
+        # AllSent = set()
+        # for entity in doc.ents:
+        #     if entity.label_=='POSITION':
+        #         AllSent.add(entity.sent)
+        # for eachSent in doc.sents:
+        #     org = []
+        #     per = []
+        #     posit = []
+        #     location = []
+        #     for ent in eachSent:
+        #         # print(ent.ent_type_)
+        #         if ent.ent_type_=="ORG":
+        #             org.append(ent)
+        #         elif ent.ent_type_=="PERSON":
+        #             per.append(ent)
+        #         elif  ent.ent_type_ == "POSITION":
+        #             posit.append(ent)
+        #         elif ent.ent_type_ == "GPE":
+        #             location.append(ent)
+        #     if not org:
+        #         for k in posit:
+        #             for j in per:
+        #                 print((j,k))
+        #                 print(eachSent)
+        #     elif not posit:
+        #         for i in org:
+        #             for j in per:
+        #                 print((i,j))
+        #                 print(eachSent)
+        #     else:
+        #         for k in posit:
+        #             for j in per:
+        #                 for i in org:
+        #                     print((i,j,k))
+        #                     print(eachSent)
+
     def extract_currency_relations(self,doc):
         spans = list(doc.ents) + list(doc.noun_chunks)
         spans = self.filter_spans(spans)
@@ -77,51 +251,8 @@ class Solution:
             for span in spans:
                 retokenizer.merge(span)
 
-        allVerb = [token for token in doc if token.pos_ == "VERB"]
-        buyWord = []
-        similarWordForBuy = ["buy","acquire"]
-        for eachVerb in allVerb:
-            for similarWord in similarWordForBuy:
-                if self.nlp(eachVerb.lemma_).similarity(self.nlp(similarWord))>0.6:
-                    buyWord.append(eachVerb)
-        # print(buyWord)
-        for eachVerb in buyWord:
-            # childs = eachVerb.children
-            # print(list(childs))
-            subjpass = 0
-            for tok in eachVerb.children:
-                # find dependency tag that contains the text "subjpass"
-                # print(tok.dep_)
-                if tok.dep_.find("subjpass") == True:
-                    subjpass = 1
-            print(subjpass)
-            buyer = None
-            beBought = None
-            money = None
-            if subjpass == 0:
-                for each in eachVerb.children:
-                    if each.dep_=="nsubj":
-                        buyer = each
-                    elif each.dep_=='dobj':
-                        beBought = each
-                    elif each.dep_=="prep" and list(each.rights)[0].ent_type_=="MONEY":
-                        money = list(each.rights)[0]
-                        # print(money)
-                print((buyer,beBought,money))
-                    # print(eachVerb)
-            else:
-                # print(list(childs))
-                for each in eachVerb.children:
-                    # print(each.dep_+"haha")
-                    if each.dep_ == "nsubjpass":
-                        beBought = each
-                    elif each.dep_=="agent":
-                        for possible_noun in each.rights:
-                            if possible_noun.pos_=="PROPN" or possible_noun.ent_type_=="ORG":
-                                buyer = possible_noun
-                    elif each.dep_=="prep" and list(each.rights)[0].ent_type_=="MONEY":
-                        money = list(each.rights)[0]
-                print((buyer, beBought, money))
+
+        self.extract_currency_relations_work_verb(doc)
             # break
         # matcher = Matcher(self.nlp.vocab,validate=True)
         #
