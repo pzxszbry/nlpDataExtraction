@@ -347,7 +347,7 @@ class Solution:
         # self.file = open("WikipediaArticles/Dallas.txt")
         # self.file = open("test.txt")
         self.outputjson = open("outputjson.json","w")
-        # file = open("test.txt")
+        
 
         fl = self.file.read()
         sentences = nltk.sent_tokenize(fl) # Split the document into sentences
