@@ -11,6 +11,13 @@ from spacy.tokens import Span
 from spacy.pipeline import EntityRuler
 class Solution:
 
+    sentenceFile = None
+    tokenFile = None
+    lemmaFile = None
+    POSFile = None
+    parseFile = None
+    wordNetFile =None
+
     nlp = spacy.load("en_core_web_md")
     matched_sents = []
     outputjson = None
@@ -186,7 +193,7 @@ class Solution:
                 arguments['Location'] = ','.join(Location)
                 thisextraction = {"template": 'Work', "sentence": str(eachSen), "arguments": arguments}
                 self.extraction.append(thisextraction)
-        return
+            return
         # for person in filter(lambda x: (x.ent_type_ == 'PERSON'), doc):
         #     PER = person
         #     LOCATION = None
@@ -303,11 +310,38 @@ class Solution:
             temp = []
             for word in token:
                 temp.append(lemmatizer.lemmatize(word))
-            lemmaArr.append(temp)
+            lemmaArr.append(temp[:])
         return lemmaArr;
+    def getParseTree(self,sentences):
+        res = []
+        from nltk.data import find
+        from bllipparser import RerankingParser
+        model_dir = find('models/bllip_wsj_no_aux').path
+        parser = RerankingParser.from_unified_model_dir(model_dir)
+        for sentence in sentences[:2]:
+            best = parser.parse(sentence)[0]
+            res.append(best)
+        return res
+    def getWordNetFeature(self,tokens):
+        from nltk.corpus import wordnet as wn
+        res = []
 
+        for token in tokens[0]:
+            mydict = dict()
+            synset = wn.synsets(token[0])
+            if synset:
+                synset = synset[0]
+                mydict["synset"] = str(synset)
+                mydict["hypernyms"]= str(synset.hypernyms())
+                mydict["hyponyms"] = str(synset.hyponyms())
+                mydict["part_meronyms"] = str(synset.part_meronyms())
+                mydict["member_holonyms"] = str(synset.member_holonyms())
+                res.append(mydict)
+        return res
+
+    # def word
     def main(self):
-        self.file = open("AppleInc_coref.txt")
+        self.file = open("WikipediaArticles_coref/AppleInc_coref.txt")
         # file = open("WikipediaArticles/IBM.txt")
         # file = open("WikipediaArticles/AppleInc.txt")
         # self.file = open("WikipediaArticles/Dallas.txt")
@@ -317,23 +351,35 @@ class Solution:
 
         fl = self.file.read()
         sentences = nltk.sent_tokenize(fl) # Split the document into sentences
+        # print(sentences[0])
+        self.sentenceFile = open("sentenceFile.txt","w")
+        self.sentenceFile.write(str(sentences))
+
+
         tokens = [nltk.word_tokenize(sentence) for sentence in sentences] # Tokenize the sentences into words
+        self.tokenFile = open("tokenFile.txt","w")
+        self.tokenFile.write(str(tokens))
+
         lemmaArr = self.lemmatize(tokens)  # Lemmatize the words to extract lemmas as features
+
+        self.lemmaFile = open("lemmaFile.txt","w")
+        self.lemmaFile.write(str(lemmaArr))
+
         pos_tag = [nltk.pos_tag(token) for token in lemmaArr] # Part-of-speech (POS) tag the words to extract POS tag features
 
-        doc = self.nlp(fl)
+        self.POSFile = open("POSFile.txt","w")
+        self.POSFile.write(str(pos_tag))
 
-        positionList =['founder','appoint', 'CEO', 'CFO', 'ceo', 'chief', 'officer', 'Vice', 'vice', 'chairman', 'Officer', 'President', 'president', 'senior', 'assistant', 'director', 'Chief', 'member', 'executive']
-        # for pos in position:
-        #     for i in doc:
-        #         if i.has_vector and (self.nlp(i.lemma_).similarity(self.nlp(pos))) > 0.6:
-        #             positionList.add(i.lemma_)
-        #             print(i.lemma_)
-        # print(positionList)
-        # print(positionList)
-        #
-        # positionList = ["ceo", "chief executive officer", "president", "chairman",
-        #                       "partner", "dean"]
+        self.parseFile = open("parseFile.txt","w")
+        parseTree = self.getParseTree(sentences)
+        self.parseFile.write(str(parseTree))
+
+        self.wordNetFile = open("wordNet.json","w")
+        wordNetFeature = self.getWordNetFeature(pos_tag)
+        theDict = {"feature":"wordNet","wordNetFeature":wordNetFeature}
+        self.wordNetFile.write(json.dumps(theDict))
+
+        positionList =['boss','founder','appoint', 'CEO', 'CFO', 'ceo', 'chief', 'officer', 'Vice', 'vice', 'chairman', 'Officer', 'President', 'president', 'senior', 'assistant', 'director', 'Chief', 'member', 'executive']
         ruler = EntityRuler(self.nlp,overwrite_ents=True)
         patterns1 = [{"label": "GPE", "pattern": "Richardson"}]
         patterns2 = [{"label":"POSITION","pattern":[{'POS': 'DET', 'OP': '?'},
@@ -346,7 +392,7 @@ class Solution:
         ruler.add_patterns(patterns2)
         self.nlp.add_pipe(ruler)
         doc = self.nlp(fl)
-        print([(ent.text, ent.label_) for ent in doc.ents])
+        # print([(ent.text, ent.label_) for ent in doc.ents])
         relations = self.extract_currency_relations(doc)
         # print([(ent.text, ent.label_) for ent in doc.ents])
 
