@@ -73,8 +73,10 @@ class Solution:
                         else:
                             arguments["item"] = str(each)
 
-                    elif each.dep_ == "prep" and list(each.rights)[0].ent_type_ == "MONEY":
+                    elif each.dep_ == "prep" and (list(each.rights)[0].ent_type_ == "MONEY"):
                         arguments["price"] = str(list(each.rights)[0])
+                    elif each.dep_ == "prep" and (each.nbor(1).ent_type_ == "MONEY"):
+                        arguments["price"] = str(each.nbor(1))
                         # print(money)
 
                 # arguments = {"buyer":str(buyer),"item":str(beBought),"price":str(money)}
@@ -84,10 +86,14 @@ class Solution:
                 for each in eachVerb.children:
                     if each.dep_ == "nsubjpass":
                         arguments["item"] = str(each)
-                    elif each.dep_ == "agent":
-                        for possible_noun in each.rights:
-                            if possible_noun.pos_ == "PROPN" or possible_noun.ent_type_ == "ORG":
-                                arguments["buyer"] = str(possible_noun)
+                    elif each.dep_ == "agent" or each.dep_ == "prep":
+                        if each.dep_ == "prep" and each.nbor(1).ent_type=='ORG':
+                            arguments["buyer"] = str(each.nbor(1))
+                        else:
+                            for possible_noun in each.rights:
+                                if possible_noun.pos_ == "PROPN" or possible_noun.ent_type_ == "ORG":
+                                    arguments["buyer"] = str(possible_noun)
+
                     elif each.dep_ == "prep" and list(each.rights)[0].ent_type_ == "MONEY":
                         arguments["price"] = str(list(each.rights)[0])
             thisextraction = {"template":'Buy',"sentence":str(eachVerb.sent),"arguments":arguments}
@@ -98,7 +104,7 @@ class Solution:
         AcquisitionNoun = []
         for eachNoun in allNoun:
             for similarWord in similarWordForAcquisition:
-                if self.nlp(eachNoun.lemma_).similarity(self.nlp(similarWord)) > 0.6:
+                if eachNoun.has_vector and self.nlp(eachNoun.lemma_).similarity(self.nlp(similarWord)) > 0.6:
                     AcquisitionNoun.append(eachNoun)
         for eachNoun in AcquisitionNoun:
             mydoc = eachNoun.sent
@@ -123,19 +129,19 @@ class Solution:
             self.extraction.append(thisextraction)
 
     def extract_currency_relations_work_verb(self,doc):
-        def preprocessPosition():
-            matcher = Matcher(self.nlp.vocab)
-            pattern = [{'POS': 'DET', 'OP': '?'},
-                       {'POS': 'ADJ', 'OP': '?'},
-                       {'LEMMA': {"IN": ["ceo","chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
-            # pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
-            ruler.add_patterns(patterns)
-            self.nlp.add_pipe(ruler)
-            # matches = matcher(doc)
-            # for match_id, start, end in matches:
-            #     string_id = self.nlp.vocab.strings[match_id]  # Get string representation
-            #     span = doc[start:end]  # The matched span
-        # preprocessPosition()
+        # def preprocessPosition():
+        #     matcher = Matcher(self.nlp.vocab)
+        #     pattern = [{'POS': 'DET', 'OP': '?'},
+        #                {'POS': 'ADJ', 'OP': '?'},
+        #                {'LEMMA': {"IN": ["ceo","chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
+        #     # pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
+        #     ruler.add_patterns(patterns)
+        #     self.nlp.add_pipe(ruler)
+        #     # matches = matcher(doc)
+        #     # for match_id, start, end in matches:
+        #     #     string_id = self.nlp.vocab.strings[match_id]  # Get string representation
+        #     #     span = doc[start:end]  # The matched span
+        # # preprocessPosition()
 
         for eachSen in doc.sents:
             arguments = dict()
@@ -168,7 +174,12 @@ class Solution:
                         Position.append(str(token))
                     elif token.ent_type_=='GPE':
                         Location.append(str(token))
-            if Person:
+            count = 0
+            count = count+1 if Position else count
+            count = count+1 if Location else count
+            count = count+1 if Organization else count
+            count = count+1 if Person else 0
+            if count>=2:
                 arguments['person'] = Person
                 arguments['organization'] = ','.join(Organization)
                 arguments['Position'] = ','.join(Position)
@@ -176,6 +187,29 @@ class Solution:
                 thisextraction = {"template": 'Work', "sentence": str(eachSen), "arguments": arguments}
                 self.extraction.append(thisextraction)
         return
+        # for person in filter(lambda x: (x.ent_type_ == 'PERSON'), doc):
+        #     PER = person
+        #     LOCATION = None
+        #     if person.head.lemma_ == 'be':
+        #         possible_position = person.head.rights
+        #         for posi in possible_position:
+        #             POS = None
+        #             if posi.ent_type_ == 'POSITION':
+        #                 POS = posi
+        #                 ORG = None
+        #                 # print(posi.nbor(1))
+        #                 if posi.nbor(2).ent_type_ =='ORG':
+        #                     ORG = posi.nbor(2)
+        #                 print(POS, PER, LOCATION, ORG)
+        #                 # print(posi)
+        #                 for possible_pos in posi.rights:
+        #                     if (possible_pos.ent_type_ == 'POSITION' and (possible_pos.dep_ == 'appos' or possible_pos.dep_ == 'conj')):
+        #                         POS = possible_pos
+        #                         ORG = None
+        #                         if possible_pos.nbor(2).ent_type_ =='ORG':
+        #                             ORG = possible_pos.nbor(2)
+        #                         print(POS, PER, LOCATION, ORG)
+
 
     def extract_currency_relations_part_of(self,doc):
         for eachSent in doc.sents:
@@ -287,16 +321,25 @@ class Solution:
         lemmaArr = self.lemmatize(tokens)  # Lemmatize the words to extract lemmas as features
         pos_tag = [nltk.pos_tag(token) for token in lemmaArr] # Part-of-speech (POS) tag the words to extract POS tag features
 
+        doc = self.nlp(fl)
 
-
+        positionList =['founder','appoint', 'CEO', 'CFO', 'ceo', 'chief', 'officer', 'Vice', 'vice', 'chairman', 'Officer', 'President', 'president', 'senior', 'assistant', 'director', 'Chief', 'member', 'executive']
+        # for pos in position:
+        #     for i in doc:
+        #         if i.has_vector and (self.nlp(i.lemma_).similarity(self.nlp(pos))) > 0.6:
+        #             positionList.add(i.lemma_)
+        #             print(i.lemma_)
+        # print(positionList)
+        # print(positionList)
+        #
+        # positionList = ["ceo", "chief executive officer", "president", "chairman",
+        #                       "partner", "dean"]
         ruler = EntityRuler(self.nlp,overwrite_ents=True)
         patterns1 = [{"label": "GPE", "pattern": "Richardson"}]
         patterns2 = [{"label":"POSITION","pattern":[{'POS': 'DET', 'OP': '?'},
                    {'POS': 'ADJ', 'OP': '*'},
                    {'LEMMA': {
-                       "IN": ["ceo", "chief executive officer", "the chairman", "co-founder", "ceo", "former ceo",
-                              "former president", "president", "chairman", "former chairman", "Group President",
-                              "partner", "dean"]}}]}
+                       "IN": positionList}}]}
                     ]
         # pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
         ruler.add_patterns(patterns1)
