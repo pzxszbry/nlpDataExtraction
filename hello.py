@@ -186,7 +186,7 @@ class Solution:
             count = count+1 if Location else count
             count = count+1 if Organization else count
             count = count+1 if Person else 0
-            if count>=2:
+            if count>=1:
                 arguments['person'] = Person
                 arguments['organization'] = ','.join(Organization)
                 arguments['Position'] = ','.join(Position)
@@ -341,11 +341,7 @@ class Solution:
 
     # def word
     def main(self):
-# <<<<<<< HEAD
-#         # self.file = open("WikipediaArticles_coref/Amazon_com_coref.txt")
-#         self.file = open("WikipediaArticles_coref/IBM_coref.txt")
-# =======
-        self.file = open("input/test.txt")
+        self.file = open("output/test_coref.txt")
 # >>>>>>> 49c3523ad6e75a8c7732005cfdbd5165806d6ad5
         # file = open("WikipediaArticles/IBM.txt")
         # file = open("WikipediaArticles/AppleInc.txt")
