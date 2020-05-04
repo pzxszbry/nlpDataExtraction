@@ -6,20 +6,19 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet as wn
 from spacy import displacy
 from spacy.matcher import Matcher
+lemmatizer = WordNetLemmatizer()
 from spacy.tokens import Span
 from spacy.pipeline import EntityRuler
-
-lemmatizer = WordNetLemmatizer()
-
-
 class Solution:
-    nlp = spacy.load("en_core_web_md")
+
     sentenceFile = None
     tokenFile = None
     lemmaFile = None
     POSFile = None
     parseFile = None
     wordNetFile =None
+
+    nlp = spacy.load("en_core_web_md")
     matched_sents = []
     outputjson = None
     file = None
@@ -313,16 +312,16 @@ class Solution:
                 temp.append(lemmatizer.lemmatize(word))
             lemmaArr.append(temp[:])
         return lemmaArr;
-    # def getParseTree(self,sentences):
-    #     res = []
-    #     from nltk.data import find
-    #     from bllipparser import RerankingParser
-    #     model_dir = find('models/bllip_wsj_no_aux').path
-    #     parser = RerankingParser.from_unified_model_dir(model_dir)
-    #     for sentence in sentences[:2]:
-    #         best = parser.parse(sentence)[0]
-    #         res.append(best)
-    #     return res
+    def getParseTree(self,sentences):
+        res = []
+        from nltk.data import find
+        from bllipparser import RerankingParser
+        model_dir = find('models/bllip_wsj_no_aux').path
+        parser = RerankingParser.from_unified_model_dir(model_dir)
+        for sentence in sentences[:2]:
+            best = parser.parse(sentence)[0]
+            res.append(best)
+        return res
     def getWordNetFeature(self,tokens):
         from nltk.corpus import wordnet as wn
         res = []
@@ -342,50 +341,57 @@ class Solution:
 
     # def word
     def main(self):
-        # self.file = open("WikipediaArticles_coref/AppleInc_coref.txt")
+        self.file = open("input/test.txt")
         # file = open("WikipediaArticles/IBM.txt")
         # file = open("WikipediaArticles/AppleInc.txt")
         # self.file = open("WikipediaArticles/Dallas.txt")
         # self.file = open("test.txt")
-        self.file = open("output/test_coref.txt", 'r', encoding='UTF-8-sig')
-        # self.outputjson = open("output/outputjson.json","w")
+        self.outputjson = open("outputjson.json","w")
 
 
         fl = self.file.read()
+
+        print_list = list()
+
         sentences = nltk.sent_tokenize(fl) # Split the document into sentences
         # print(sentences[0])
-        self.sentenceFile = open("output/sentenceFile.txt","w", encoding='UTF-8-sig')
-        self.sentenceFile.write(str(sentences))
-        self.sentenceFile.close()
+        self.sentenceFile = open("sentenceFile.txt","w")
+        self.sentenceFile.write('\n\n'.join(sentences))
 
 
         tokens = [nltk.word_tokenize(sentence) for sentence in sentences] # Tokenize the sentences into words
-        self.tokenFile = open("output/tokenFile.txt","w", encoding='UTF-8-sig')
-        self.tokenFile.write(str(tokens))
-        self.tokenFile.close()
+        print_list.clear()
+        for t in tokens:
+            print_list.append(str(t))
+        self.tokenFile = open("tokenFile.txt","w")
+        self.tokenFile.write('\n\n'.join(print_list))
 
         lemmaArr = self.lemmatize(tokens)  # Lemmatize the words to extract lemmas as features
+        print_list.clear()
+        for lemma in lemmaArr:
+            print_list.append(str(lemma))
+        self.lemmaFile = open("lemmaFile.txt","w")
+        self.lemmaFile.write('\n\n'.join(print_list))
 
-        self.lemmaFile = open("output/lemmaFile.txt","w", encoding='UTF-8-sig')
-        self.lemmaFile.write(str(lemmaArr))
-        self.lemmaFile.close()
 
         pos_tag = [nltk.pos_tag(token) for token in lemmaArr] # Part-of-speech (POS) tag the words to extract POS tag features
+        print_list.clear()
+        for pos in pos_tag:
+            print_list.append(str(pos))
+        self.POSFile = open("POSFile.txt","w")
+        self.POSFile.write('\n\n'.join(print_list))
 
-        self.POSFile = open("output/POSFile.txt","w", encoding='UTF-8-sig')
-        self.POSFile.write(str(pos_tag))
-        self.POSFile.close()
+        self.parseFile = open("parseFile.txt","w")
+        parseTree = self.getParseTree(sentences)
+        print_list.clear()
+        for pt in parseTree:
+            print_list.append(str(pt))
+        self.parseFile.write('\n'.join(print_list))
 
-        # self.parseFile = open("output/parseFile.txt","w", encoding='UTF-8-sig')
-        # parseTree = self.getParseTree(sentences)
-        # self.parseFile.write(str(parseTree))
-        # self.parseFile.close()
-
-        self.wordNetFile = open("output/wordNet.json","w", encoding='UTF-8-sig')
+        self.wordNetFile = open("wordNet.json","w")
         wordNetFeature = self.getWordNetFeature(pos_tag)
         theDict = {"feature":"wordNet","wordNetFeature":wordNetFeature}
         self.wordNetFile.write(json.dumps(theDict, indent=4, separators=(',', ':')))
-        self.wordNetFile.close()
 
 
 
@@ -417,9 +423,9 @@ class Solution:
         outputfile2.write(html2)
 
         mydict = {"document":self.file.name,"extraction":self.extraction}
-        self.outputjson = open("output/outputjson.json","w", encoding='UTF-8-sig')
         self.outputjson.write(json.dumps(mydict, indent=4, separators=(',', ':')))
-        self.outputjson.close()
+
+
 if __name__=='__main__':
     s = Solution()
     s.main();
