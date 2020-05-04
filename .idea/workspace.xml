@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f664b6f6-8363-49cf-a19e-8cd20612c226" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wordNet.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,18 +14,17 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/nlpDataExtraction$hello2.coverage" NAME="hello2 Coverage Results" MODIFIED="1588535853602" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/nlpDataExtraction$hello.coverage" NAME="hello Coverage Results" MODIFIED="1588544963374" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/nlpDataExtraction$hello.coverage" NAME="hello Coverage Results" MODIFIED="1588557567292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hello.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="349" column="8" selection-start-line="349" selection-start-column="8" selection-end-line="349" selection-end-column="8" />
+            <state relative-caret-position="233">
+              <caret line="383" lean-forward="true" selection-start-line="383" selection-end-line="383" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
-                <element signature="e#4310#5690#0" />
               </folding>
             </state>
           </provider>
@@ -33,7 +34,7 @@
         <entry file="file://$PROJECT_DIR$/wordNet.json">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="31" lean-forward="true" selection-start-column="31" selection-end-column="31" />
+              <caret column="31" selection-start-column="31" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -46,7 +47,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WikipediaArticles_coref/AppleInc_coref.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="133">
               <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
@@ -55,17 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2830">
+            <state relative-caret-position="3382">
               <caret line="178" selection-start-line="178" selection-end-line="178" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wordNet.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="29" selection-start-column="29" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -90,7 +82,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tokenFile.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
+            <state relative-caret-position="2242">
               <caret column="118306" selection-start-column="118306" selection-end-column="118306" />
             </state>
           </provider>
@@ -157,9 +149,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1437" />
-    <option name="y" value="-72" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1504" />
+    <option name="y" value="-68" />
     <option name="width" value="1920" />
     <option name="height" value="1014" />
   </component>
@@ -168,7 +160,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -189,6 +180,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -302,12 +294,13 @@
       <workItem from="1588396866321" duration="6837000" />
       <workItem from="1588405260418" duration="1425000" />
       <workItem from="1588436985693" duration="12582000" />
-      <workItem from="1588453302015" duration="34817000" />
+      <workItem from="1588453302015" duration="34895000" />
+      <workItem from="1588555625010" duration="473000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187936000" />
+    <option name="totallyTimeSpent" value="188487000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -319,15 +312,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1436" y="-72" width="1920" height="1014" extended-state="6" />
-    <editor active="true" />
+    <frame x="1504" y="-68" width="1920" height="1014" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23162939" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23375931" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.32321042" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.32321042" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3982684" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -425,9 +417,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kk.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/kk.txt" />
     <entry file="file://$PROJECT_DIR$/WikipediaArticles/Dallas.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4180">
@@ -482,23 +472,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Amazon_com_coref.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="43" column="57" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppleInc_coref.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="619" column="728" selection-start-line="619" selection-start-column="623" selection-end-line="619" selection-end-column="728" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/outputjson.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Amazon_com_coref.txt" />
+    <entry file="file://$PROJECT_DIR$/AppleInc_coref.txt" />
+    <entry file="file://$PROJECT_DIR$/outputjson.txt" />
     <entry file="file:///usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/importlib/_bootstrap.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
@@ -518,26 +494,29 @@
     <entry file="file://$PROJECT_DIR$/parseFile.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/POSFile.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sentenceFile.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test2.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.txt">
+    <entry file="file://$PROJECT_DIR$/test2.txt" />
+    <entry file="file://$PROJECT_DIR$/test.txt" />
+    <entry file="file://$PROJECT_DIR$/wordNet.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state>
+          <caret column="31" selection-start-column="31" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tokenFile.txt">
+    <entry file="file://$PROJECT_DIR$/WikipediaArticles_coref/Amazon_com_coref.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WikipediaArticles_coref/AppleInc_coref.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret column="118306" selection-start-column="118306" selection-end-column="118306" />
+        <state relative-caret-position="133">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3382">
+          <caret line="178" selection-start-line="178" selection-end-line="178" />
         </state>
       </provider>
     </entry>
@@ -548,29 +527,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WikipediaArticles_coref/Amazon_com_coref.txt">
+    <entry file="file://$PROJECT_DIR$/POSFile.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/WikipediaArticles_coref/AppleInc_coref.txt">
+    <entry file="file://$PROJECT_DIR$/tokenFile.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="2242">
+          <caret column="118306" selection-start-column="118306" selection-end-column="118306" />
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/json/encoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2830">
-          <caret line="178" selection-start-line="178" selection-end-line="178" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wordNet.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="31" lean-forward="true" selection-start-column="31" selection-end-column="31" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/sentenceFile.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/hello2.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -584,11 +552,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hello.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="349" column="8" selection-start-line="349" selection-start-column="8" selection-end-line="349" selection-end-column="8" />
+        <state relative-caret-position="233">
+          <caret line="383" lean-forward="true" selection-start-line="383" selection-end-line="383" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
-            <element signature="e#4310#5690#0" />
           </folding>
         </state>
       </provider>

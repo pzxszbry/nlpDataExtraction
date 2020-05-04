@@ -347,7 +347,7 @@ class Solution:
         # self.file = open("WikipediaArticles/Dallas.txt")
         # self.file = open("test.txt")
         self.outputjson = open("outputjson.json","w")
-        
+
 
         fl = self.file.read()
         sentences = nltk.sent_tokenize(fl) # Split the document into sentences
@@ -379,6 +379,9 @@ class Solution:
         theDict = {"feature":"wordNet","wordNetFeature":wordNetFeature}
         self.wordNetFile.write(json.dumps(theDict))
 
+
+
+
         positionList =['boss','founder','appoint', 'CEO', 'CFO', 'ceo', 'chief', 'officer', 'Vice', 'vice', 'chairman', 'Officer', 'President', 'president', 'senior', 'assistant', 'director', 'Chief', 'member', 'executive']
         ruler = EntityRuler(self.nlp,overwrite_ents=True)
         patterns1 = [{"label": "GPE", "pattern": "Richardson"}]
@@ -387,7 +390,7 @@ class Solution:
                    {'LEMMA': {
                        "IN": positionList}}]}
                     ]
-        # pattern = [{'POS': 'ADJ', 'OP': '?'},{'LOWER':  {"IN": ["chief executive officer","the chairman","co-founder","ceo","former ceo","former president","president","chairman","former chairman","Group President","partner","dean"]}}]
+
         ruler.add_patterns(patterns1)
         ruler.add_patterns(patterns2)
         self.nlp.add_pipe(ruler)
