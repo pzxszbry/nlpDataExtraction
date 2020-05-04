@@ -2,11 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f664b6f6-8363-49cf-a19e-8cd20612c226" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/test1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/test2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input/test3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output/test_coref.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/step1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/step2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/POSFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/POSFile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dep.html" beforeDir="false" afterPath="$PROJECT_DIR$/dep.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ent.html" beforeDir="false" afterPath="$PROJECT_DIR$/ent.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello2.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lemmaFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lemmaFile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outputjson.json" beforeDir="false" afterPath="$PROJECT_DIR$/outputjson.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parseFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/parseFile.txt" afterDir="false" />
@@ -29,8 +38,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hello.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="78" column="65" selection-start-line="78" selection-start-column="65" selection-end-line="78" selection-end-column="65" />
+            <state relative-caret-position="294">
+              <caret line="349" column="50" lean-forward="true" selection-start-line="349" selection-start-column="50" selection-end-line="349" selection-end-column="50" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -61,7 +70,6 @@
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#figure#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="e#367#407#0" expanded="true" />
-                <element signature="n#style#0;n#mark#0;n#div#0;n#figure#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -185,11 +193,6 @@
             <path>
               <item name="nlpDataExtraction" type="b2602c69:ProjectViewProjectNode" />
               <item name="nlpDataExtraction" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nlpDataExtraction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nlpDataExtraction" type="462c0819:PsiDirectoryNode" />
-              <item name="WikipediaArticles_coref" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nlpDataExtraction" type="b2602c69:ProjectViewProjectNode" />
@@ -321,12 +324,12 @@
       <workItem from="1588453302015" duration="34895000" />
       <workItem from="1588555625010" duration="473000" />
       <workItem from="1588563351790" duration="1769000" />
-      <workItem from="1588568041287" duration="5053000" />
+      <workItem from="1588568041287" duration="5495000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195309000" />
+    <option name="totallyTimeSpent" value="195751000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -341,12 +344,12 @@
     <frame x="1440" y="-72" width="1920" height="1014" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23801917" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23801917" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.25921908" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.25921908" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3982684" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -560,7 +563,6 @@
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#figure#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="e#367#407#0" expanded="true" />
-            <element signature="n#style#0;n#mark#0;n#div#0;n#figure#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -574,8 +576,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hello.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="78" column="65" selection-start-line="78" selection-start-column="65" selection-end-line="78" selection-end-column="65" />
+        <state relative-caret-position="294">
+          <caret line="349" column="50" lean-forward="true" selection-start-line="349" selection-start-column="50" selection-end-line="349" selection-end-column="50" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>

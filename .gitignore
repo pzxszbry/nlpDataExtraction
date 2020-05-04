@@ -1,0 +1,9 @@
+
+.vscode/settings.json
+output/wordNet.json
+output/sentenceFile.txt
+output/POSFile.txt
+output/tokenFile.txt
+output/parseFile.txt
+output/lemmaFile.txt
+dep.html

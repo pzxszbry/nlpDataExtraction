@@ -1,1 +1,114 @@
+<<<<<<< HEAD
 {"feature": "wordNet", "wordNetFeature": [{"synset": "Synset('international.n.01')", "hypernyms": "[Synset('socialism.n.02')]", "hyponyms": "[]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('business.n.01')", "hypernyms": "[Synset('enterprise.n.02')]", "hyponyms": "[Synset('agency.n.02'), Synset('brokerage.n.02'), Synset('carrier.n.05'), Synset('chain.n.04'), Synset('firm.n.01'), Synset('franchise.n.02'), Synset('manufacturer.n.01'), Synset('partnership.n.01'), Synset('processor.n.01'), Synset('shipbuilder.n.03'), Synset('underperformer.n.02')]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('machine.n.01')", "hypernyms": "[Synset('device.n.01')]", "hyponyms": "[Synset('assembly.n.01'), Synset('bagger.n.02'), Synset('calculator.n.02'), Synset('calender.n.01'), Synset('cash_machine.n.01'), Synset('comber.n.03'), Synset('computer.n.01'), Synset('concrete_mixer.n.01'), Synset('corker.n.02'), Synset('cotton_gin.n.01'), Synset('decoder.n.02'), Synset('farm_machine.n.01'), Synset('franking_machine.n.01'), Synset('hop-picker.n.01'), Synset('machine_tool.n.01'), Synset('machinery.n.01'), Synset('milking_machine.n.01'), Synset('motor.n.01'), Synset('pavior.n.01'), Synset('perpetual_motion_machine.n.01'), Synset('pile_driver.n.01'), Synset('power_shovel.n.01'), Synset('power_tool.n.01'), Synset('press.n.03'), Synset('press.n.07'), Synset('printer.n.03'), Synset('record_player.n.01'), Synset('riveting_machine.n.01'), Synset('self-feeder.n.01'), Synset('simulator.n.01'), Synset('slicer.n.02'), Synset('slot_machine.n.01'), Synset('snow_thrower.n.01'), Synset('sorter.n.02'), Synset('stamp.n.07'), Synset('staple_gun.n.01'), Synset('stapler.n.01'), Synset('textile_machine.n.01'), Synset('time_machine.n.01'), Synset('trimmer.n.02'), Synset('workhorse.n.01'), Synset('zamboni.n.01')]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('corporation.n.01')", "hypernyms": "[Synset('firm.n.01')]", "hyponyms": "[Synset('boy_scouts_of_america.n.01'), Synset('closed_corporation.n.01'), Synset('closely_held_corporation.n.01'), Synset('conglomerate.n.02'), Synset('federal_deposit_insurance_corporation.n.01'), Synset('federal_home_loan_mortgage_corporation.n.01'), Synset('federal_national_mortgage_association.n.01'), Synset('large_cap.n.01'), Synset('shell_corporation.n.01'), Synset('small_cap.n.01')]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('be.v.01')", "hypernyms": "[]", "hyponyms": "[Synset('abound.v.01'), Synset('accept.v.08'), Synset('account.v.01'), Synset('account_for.v.01'), Synset('act.v.06'), Synset('answer.v.06'), Synset('appear.v.04'), Synset('bake.v.04'), Synset('balance.v.04'), Synset('be_well.v.01'), Synset('beat.v.12'), Synset('begin.v.06'), Synset('begin.v.07'), Synset('belong.v.01'), Synset('belong.v.02'), Synset('belong.v.04'), Synset('belong.v.05'), Synset('breathe.v.04'), Synset('buy.v.03'), Synset('clean.v.05'), Synset('cohere.v.03'), Synset('come_in_for.v.01'), Synset('come_in_handy.v.01'), Synset('compact.v.01'), Synset('compare.v.02'), Synset('confuse.v.02'), Synset('connect.v.07'), Synset('consist.v.02'), Synset('consist.v.04'), Synset('contain.v.04'), Synset('contain.v.05'), Synset('continue.v.10'), Synset('cost.v.01'), Synset('count.v.02'), Synset('count.v.07'), Synset('cover.v.18'), Synset('cut.v.25'), Synset('cut_across.v.02'), Synset('deck.v.01'), Synset('depend.v.01'), Synset('deserve.v.01'), Synset('disagree.v.02'), Synset('distribute.v.09'), Synset('diverge.v.02'), Synset('draw.v.21'), Synset('end.v.03'), Synset('fall.v.04'), Synset('fall.v.16'), Synset('feel.v.04'), Synset('figure.v.02'), Synset('fit.v.07'), Synset('gape.v.02'), Synset('go.v.10'), Synset('gravitate.v.02'), Synset('hail.v.02'), Synset('hang.v.06'), Synset('head.v.04'), Synset('hold.v.17'), Synset('hoodoo.v.01'), Synset('hum.v.02'), Synset('impend.v.01'), Synset('incarnate.v.02'), Synset('iridesce.v.01'), Synset('jumble.v.01'), Synset('kill.v.04'), Synset('lend.v.03'), Synset('let_go.v.02'), Synset('lie.v.04'), Synset('litter.v.01'), Synset('loiter.v.01'), Synset('look.v.02'), Synset('look.v.03'), Synset('lubricate.v.01'), Synset('make.v.31'), Synset('make_sense.v.01'), Synset('measure.v.03'), Synset('mope.v.02'), Synset('object.v.02'), Synset('osculate.v.01'), Synset('owe.v.03'), Synset('pay.v.07'), Synset('point.v.10'), Synset('press.v.08'), Synset('promise.v.04'), Synset('prove.v.01'), Synset('put_out.v.06'), Synset('rage.v.02'), Synset('range.v.01'), Synset('rank.v.01'), Synset('rate.v.02'), Synset('recognize.v.08'), Synset('relate.v.04'), Synset('remain.v.03'), Synset('represent.v.03'), Synset('rest.v.01'), Synset('retard.v.02'), Synset('run.v.05'), Synset('run_into.v.01'), Synset('rut.v.01'), Synset('seem.v.03'), Synset('seethe.v.02'), Synset('sell.v.02'), Synset('sell.v.06'), Synset('sell.v.07'), Synset('shine.v.04'), Synset('shine.v.05'), Synset('sparkle.v.02'), Synset('specify.v.03'), Synset('squat.v.02'), Synset('stagnate.v.01'), Synset('stagnate.v.03'), Synset('stand.v.02'), Synset('stand.v.03'), Synset('stand_by.v.03'), Synset('stay.v.01'), Synset('stay.v.04'), Synset('stick.v.04'), Synset('stink.v.01'), Synset('subtend.v.01'), Synset('suck.v.04'), Synset('suffer.v.06'), Synset('suffer.v.08'), Synset('suit.v.02'), Synset('swim.v.03'), Synset('swim.v.04'), Synset('swing.v.10'), Synset('tend.v.01'), Synset('test.v.04'), Synset('total.v.01'), Synset('translate.v.07'), Synset('transplant.v.02'), Synset('trim.v.05'), Synset('underlie.v.01'), Synset('want.v.02'), Synset('wash.v.05'), Synset('wind.v.02'), Synset('work.v.14')]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('associate_in_nursing.n.01')", "hypernyms": "[Synset('associate_degree.n.01')]", "hyponyms": "[]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('american.n.01')", "hypernyms": "[Synset('inhabitant.n.01')]", "hyponyms": "[Synset('african-american.n.01'), Synset('alabaman.n.01'), Synset('alaskan.n.01'), Synset('anglo-american.n.01'), Synset('appalachian.n.01'), Synset('arizonan.n.01'), Synset('arkansan.n.01'), Synset('asian_american.n.01'), Synset('bay_stater.n.01'), Synset('bostonian.n.01'), Synset('californian.n.01'), Synset('carolinian.n.01'), Synset('coloradan.n.01'), Synset('connecticuter.n.01'), Synset('creole.n.02'), Synset('delawarean.n.01'), Synset('floridian.n.01'), Synset('franco-american.n.01'), Synset('georgian.n.01'), Synset('german_american.n.01'), Synset('hawaiian.n.02'), Synset('idahoan.n.01'), Synset('illinoisan.n.01'), Synset('indianan.n.01'), Synset('iowan.n.01'), Synset('kansan.n.01'), Synset('kentuckian.n.01'), Synset('louisianan.n.01'), Synset('mainer.n.01'), Synset('marylander.n.01'), Synset('michigander.n.01'), Synset('minnesotan.n.01'), Synset('mississippian.n.02'), Synset('missourian.n.01'), Synset('montanan.n.01'), Synset('nebraskan.n.01'), Synset('nevadan.n.01'), Synset('new_englander.n.01'), Synset('new_hampshirite.n.01'), Synset('new_jerseyan.n.01'), Synset('new_mexican.n.01'), Synset('new_yorker.n.01'), Synset('nisei.n.01'), Synset('north_carolinian.n.01'), Synset('north_dakotan.n.01'), Synset('ohioan.n.01'), Synset('oklahoman.n.01'), Synset('oregonian.n.01'), Synset('pennsylvanian.n.02'), Synset('puerto_rican.n.01'), Synset('rhode_islander.n.01'), Synset('south_carolinian.n.01'), Synset('south_dakotan.n.01'), Synset('southerner.n.01'), Synset('spanish_american.n.01'), Synset('tennessean.n.01'), Synset('texan.n.01'), Synset('tory.n.01'), Synset('utahan.n.01'), Synset('vermonter.n.01'), Synset('virginian.n.01'), Synset('washingtonian.n.01'), Synset('washingtonian.n.02'), Synset('west_virginian.n.01'), Synset('wisconsinite.n.01'), Synset('wyomingite.n.01'), Synset('yankee.n.01'), Synset('yankee.n.03')]", "part_meronyms": "[]", "member_holonyms": "[Synset('united_states.n.01')]"}, {"synset": "Synset('multinational.s.01')", "hypernyms": "[]", "hyponyms": "[]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('information.n.01')", "hypernyms": "[Synset('message.n.02')]", "hyponyms": "[Synset('ammunition.n.03'), Synset('confirmation.n.02'), Synset('course_of_study.n.01'), Synset('database.n.01'), Synset('details.n.01'), Synset('evidence.n.03'), Synset('fact.n.02'), Synset('factoid.n.01'), Synset('format.n.01'), Synset('gen.n.01'), Synset('insider_information.n.01'), Synset('intelligence.n.03'), Synset('material.n.02'), Synset('misinformation.n.01'), Synset('news.n.01'), Synset('news.n.02'), Synset('news.n.04'), Synset('nuts_and_bolts.n.01'), Synset('propaganda.n.01'), Synset('readout.n.02'), Synset('report_card.n.01'), Synset('secret.n.01'), Synset('secret.n.02'), Synset('skinny.n.01'), Synset('stuff.n.06'), Synset('tabulation.n.01')]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('technology.n.01')", "hypernyms": "[Synset('application.n.01'), Synset('profession.n.02')]", "hyponyms": "[Synset('aeronautical_engineering.n.02'), Synset('automotive_technology.n.01'), Synset('chemical_engineering.n.02'), Synset('communications_technology.n.01'), Synset('computer_technology.n.01'), Synset('high_technology.n.01'), Synset('rail_technology.n.01')]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('company.n.01')", "hypernyms": "[Synset('institution.n.01')]", "hyponyms": "[Synset('broadcasting_company.n.01'), Synset('bureau_de_change.n.01'), Synset('car_company.n.01'), Synset('closed_shop.n.01'), Synset('corporate_investor.n.01'), Synset('distributor.n.03'), Synset('dot-com.n.01'), Synset('drug_company.n.01'), Synset('east_india_company.n.01'), Synset('electronics_company.n.01'), Synset('film_company.n.01'), Synset('food_company.n.01'), Synset('furniture_company.n.01'), Synset('holding_company.n.01'), Synset('joint-stock_company.n.01'), Synset('limited_company.n.01'), Synset('livery_company.n.01'), Synset('mining_company.n.01'), Synset('mover.n.04'), Synset('oil_company.n.01'), Synset('open_shop.n.01'), Synset('packaging_company.n.01'), Synset('pipeline_company.n.01'), Synset('printing_concern.n.01'), Synset('record_company.n.01'), Synset('service.n.04'), Synset('shipper.n.02'), Synset('shipping_company.n.01'), Synset('steel_company.n.01'), Synset('stock_company.n.01'), Synset('subsidiary_company.n.01'), Synset('target_company.n.01'), Synset('think_tank.n.01'), Synset('transportation_company.n.01'), Synset('union_shop.n.01'), Synset('white_knight.n.01')]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('headquarter.v.01')", "hypernyms": "[Synset('supply.v.01')]", "hyponyms": "[]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('inch.n.01')", "hypernyms": "[Synset('linear_unit.n.01')]", "hyponyms": "[]", "part_meronyms": "[Synset('em.n.02'), Synset('ligne.n.01'), Synset('mesh.n.01'), Synset('mil.n.03')]", "member_holonyms": "[]"}, {"synset": "Synset('new.a.01')", "hypernyms": "[]", "hyponyms": "[]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('york.n.01')", "hypernyms": "[Synset('dynasty.n.01'), Synset('royalty.n.02')]", "hyponyms": "[]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('operation.n.01')", "hypernyms": "[Synset('action.n.02')]", "hyponyms": "[Synset('commission.n.04'), Synset('idle.n.01'), Synset('running.n.03')]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('inch.n.01')", "hypernyms": "[Synset('linear_unit.n.01')]", "hyponyms": "[]", "part_meronyms": "[Synset('em.n.02'), Synset('ligne.n.01'), Synset('mesh.n.01'), Synset('mil.n.03')]", "member_holonyms": "[]"}, {"synset": "Synset('over.n.01')", "hypernyms": "[Synset('part.n.09')]", "hyponyms": "[Synset('maiden_over.n.01')]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('one_hundred_seventy.s.01')", "hypernyms": "[]", "hyponyms": "[]", "part_meronyms": "[]", "member_holonyms": "[]"}, {"synset": "Synset('state.n.04')", "hypernyms": "[Synset('political_unit.n.01')]", "hyponyms": "[Synset('ally.n.01'), Synset('city_state.n.01'), Synset('commonwealth_country.n.01'), Synset('developing_country.n.01'), Synset('dominion.n.03'), Synset('foreign_country.n.01'), Synset('reich.n.01'), Synset('rogue_state.n.01'), Synset('sea_power.n.02'), Synset('suzerain.n.01'), Synset('world_power.n.01')]", "part_meronyms": "[Synset('estate_of_the_realm.n.01')]", "member_holonyms": "[]"}]}
+=======
+{
+    "feature":"wordNet",
+    "wordNetFeature":[
+        {
+            "synset":"Synset('inch.n.01')",
+            "hypernyms":"[Synset('linear_unit.n.01')]",
+            "hyponyms":"[]",
+            "part_meronyms":"[Synset('em.n.02'), Synset('ligne.n.01'), Synset('mesh.n.01'), Synset('mil.n.03')]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('amazon.n.01')",
+            "hypernyms":"[Synset('woman.n.01')]",
+            "hyponyms":"[]",
+            "part_meronyms":"[]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('get.v.01')",
+            "hypernyms":"[]",
+            "hyponyms":"[Synset('accept.v.02'), Synset('acquire.v.05'), Synset('borrow.v.01'), Synset('buy.v.01'), Synset('buy.v.04'), Synset('capture.v.06'), Synset('catch.v.10'), Synset('collect.v.05'), Synset('come_by.v.02'), Synset('earn.v.02'), Synset('enter_upon.v.01'), Synset('find.v.03'), Synset('find.v.10'), Synset('gain.v.08'), Synset('get.v.21'), Synset('glom.v.02'), Synset('inherit.v.01'), Synset('isolate.v.02'), Synset('lease.v.04'), Synset('line_up.v.02'), Synset('obtain.v.01'), Synset('partake.v.02'), Synset('pick_up.v.06'), Synset('poll.v.03'), Synset('preempt.v.01'), Synset('preempt.v.03'), Synset('press_out.v.03'), Synset('profit.v.01'), Synset('receive.v.01'), Synset('reclaim.v.01'), Synset('recover.v.01'), Synset('recover.v.04'), Synset('turn.v.18'), Synset('win_back.v.01')]",
+            "part_meronyms":"[]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('whole.n.01')",
+            "hypernyms":"[Synset('concept.n.01')]",
+            "hyponyms":"[Synset('complex.n.01'), Synset('compound.n.01'), Synset('unit.n.04')]",
+            "part_meronyms":"[Synset('part.n.09')]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('food.n.01')",
+            "hypernyms":"[Synset('substance.n.07')]",
+            "hyponyms":"[Synset('beverage.n.01'), Synset('chyme.n.01'), Synset('comestible.n.01'), Synset('comfort_food.n.01'), Synset('commissariat.n.01'), Synset('culture_medium.n.01'), Synset('fare.n.04'), Synset('feed.n.01'), Synset('foodstuff.n.02'), Synset('micronutrient.n.01'), Synset('miraculous_food.n.01'), Synset('nutriment.n.01'), Synset('soul_food.n.01'), Synset('water.n.06'), Synset('yolk.n.02')]",
+            "part_meronyms":"[Synset('food.n.02')]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('market.n.01')",
+            "hypernyms":"[Synset('activity.n.01')]",
+            "hyponyms":"[Synset('black_market.n.02'), Synset('buyer's_market.n.01'), Synset('grey_market.n.01'), Synset('labor_market.n.01'), Synset('monopoly.n.01'), Synset('monopsony.n.01'), Synset('oligopoly.n.01'), Synset('seller's_market.n.01')]",
+            "part_meronyms":"[Synset('commercial_enterprise.n.02')]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('united_states.n.01')",
+            "hypernyms":"[]",
+            "hyponyms":"[]",
+            "part_meronyms":"[Synset('alabama.n.01'), Synset('alaska.n.01'), Synset('american_state.n.01'), Synset('arizona.n.01'), Synset('arkansas.n.01'), Synset('california.n.01'), Synset('colony.n.03'), Synset('colorado.n.01'), Synset('connecticut.n.01'), Synset('connecticut.n.02'), Synset('dakota.n.02'), Synset('delaware.n.04'), Synset('district_of_columbia.n.01'), Synset('east.n.03'), Synset('florida.n.01'), Synset('georgia.n.01'), Synset('great_lakes.n.01'), Synset('hawaii.n.01'), Synset('idaho.n.01'), Synset('illinois.n.01'), Synset('indiana.n.01'), Synset('iowa.n.02'), Synset('kansas.n.01'), Synset('kentucky.n.01'), Synset('louisiana.n.01'), Synset('louisiana_purchase.n.01'), Synset('maine.n.01'), Synset('maryland.n.01'), Synset('massachusetts.n.01'), Synset('michigan.n.01'), Synset('mid-atlantic_states.n.01'), Synset('midwest.n.01'), Synset('minnesota.n.01'), Synset('mississippi.n.01'), Synset('mississippi.n.02'), Synset('missouri.n.01'), Synset('missouri.n.02'), Synset('montana.n.01'), Synset('nebraska.n.01'), Synset('nevada.n.01'), Synset('new_england.n.01'), Synset('new_hampshire.n.01'), Synset('new_jersey.n.01'), Synset('new_mexico.n.01'), Synset('new_river.n.01'), Synset('new_york.n.02'), Synset('niagara.n.02'), Synset('niobrara.n.01'), Synset('north.n.01'), Synset('north_carolina.n.01'), Synset('north_dakota.n.01'), Synset('ohio.n.01'), Synset('ohio.n.02'), Synset('oklahoma.n.01'), Synset('oregon.n.01'), Synset('pacific_northwest.n.01'), Synset('pennsylvania.n.01'), Synset('rhode_island.n.01'), Synset('rio_grande.n.01'), Synset('saint_lawrence.n.02'), Synset('south.n.01'), Synset('south_carolina.n.02'), Synset('south_dakota.n.01'), Synset('sunbelt.n.01'), Synset('tennessee.n.01'), Synset('texas.n.01'), Synset('twin.n.03'), Synset('utah.n.01'), Synset('vermont.n.01'), Synset('virginia.n.01'), Synset('washington.n.02'), Synset('west.n.03'), Synset('west_virginia.n.01'), Synset('wisconsin.n.02'), Synset('wyoming.n.01'), Synset('yosemite.n.01'), Synset('yukon.n.01')]",
+            "member_holonyms":"[Synset('north_atlantic_treaty_organization.n.01'), Synset('organization_of_american_states.n.01')]"
+        },
+        {
+            "synset":"Synset('billion.n.01')",
+            "hypernyms":"[Synset('large_integer.n.01')]",
+            "hyponyms":"[]",
+            "part_meronyms":"[]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('vastly.r.01')",
+            "hypernyms":"[]",
+            "hyponyms":"[]",
+            "part_meronyms":"[]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('increase.v.01')",
+            "hypernyms":"[Synset('change_magnitude.v.01')]",
+            "hyponyms":"[Synset('accrue.v.01'), Synset('accumulate.v.02'), Synset('add.v.01'), Synset('add_to.v.01'), Synset('appreciate.v.04'), Synset('broaden.v.04'), Synset('crescendo.v.01'), Synset('explode.v.10'), Synset('gain.v.07'), Synset('grow.v.02'), Synset('intensify.v.02'), Synset('intensify.v.03'), Synset('pullulate.v.04'), Synset('pyramid.v.04'), Synset('shoot_up.v.01'), Synset('snowball.v.01'), Synset('spike.v.06'), Synset('swell.v.01'), Synset('wax.v.02'), Synset('wax.v.03'), Synset('widen.v.01')]",
+            "part_meronyms":"[]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('amazon.n.01')",
+            "hypernyms":"[Synset('woman.n.01')]",
+            "hyponyms":"[]",
+            "part_meronyms":"[]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('presence.n.01')",
+            "hypernyms":"[Synset('being.n.01')]",
+            "hyponyms":"[Synset('hereness.n.01'), Synset('immanence.n.01'), Synset('inherence.n.01'), Synset('occurrence.n.02'), Synset('shadow.n.07'), Synset('thereness.n.01'), Synset('thereness.n.02'), Synset('ubiety.n.01'), Synset('ubiquity.n.01')]",
+            "part_meronyms":"[]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('angstrom.n.01')",
+            "hypernyms":"[Synset('metric_linear_unit.n.01')]",
+            "hyponyms":"[]",
+            "part_meronyms":"[Synset('picometer.n.01')]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('angstrom.n.01')",
+            "hypernyms":"[Synset('metric_linear_unit.n.01')]",
+            "hyponyms":"[]",
+            "part_meronyms":"[Synset('picometer.n.01')]",
+            "member_holonyms":"[]"
+        },
+        {
+            "synset":"Synset('retailer.n.01')",
+            "hypernyms":"[Synset('distributor.n.01'), Synset('merchant.n.01')]",
+            "hyponyms":"[Synset('chandler.n.02'), Synset('licensee.n.01')]",
+            "part_meronyms":"[]",
+            "member_holonyms":"[]"
+        }
+    ]
+}
+>>>>>>> 49c3523ad6e75a8c7732005cfdbd5165806d6ad5
