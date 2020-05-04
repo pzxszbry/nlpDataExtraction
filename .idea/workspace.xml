@@ -11,7 +11,6 @@
       <change beforePath="$PROJECT_DIR$/outputjson.json" beforeDir="false" afterPath="$PROJECT_DIR$/outputjson.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parseFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/parseFile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sentenceFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sentenceFile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testForPartOf.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testForPartOf.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tokenFile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tokenFile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wordNet.json" beforeDir="false" afterPath="$PROJECT_DIR$/wordNet.json" afterDir="false" />
     </list>
@@ -23,15 +22,15 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/nlpDataExtraction$hello2.coverage" NAME="hello2 Coverage Results" MODIFIED="1588535853602" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/nlpDataExtraction$hello.coverage" NAME="hello Coverage Results" MODIFIED="1588612579238" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/nlpDataExtraction$hello.coverage" NAME="hello Coverage Results" MODIFIED="1588613001221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hello.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="344" column="58" selection-start-line="344" selection-start-column="58" selection-end-line="344" selection-end-column="58" />
+            <state relative-caret-position="383">
+              <caret line="78" column="65" selection-start-line="78" selection-start-column="65" selection-end-line="78" selection-end-column="65" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -322,12 +321,12 @@
       <workItem from="1588453302015" duration="34895000" />
       <workItem from="1588555625010" duration="473000" />
       <workItem from="1588563351790" duration="1769000" />
-      <workItem from="1588568041287" duration="4638000" />
+      <workItem from="1588568041287" duration="5053000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="194894000" />
+    <option name="totallyTimeSpent" value="195309000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -342,12 +341,12 @@
     <frame x="1440" y="-72" width="1920" height="1014" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23801917" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23801917" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.25921908" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.25921908" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3982684" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -575,8 +574,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hello.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="344" column="58" selection-start-line="344" selection-start-column="58" selection-end-line="344" selection-end-column="58" />
+        <state relative-caret-position="383">
+          <caret line="78" column="65" selection-start-line="78" selection-start-column="65" selection-end-line="78" selection-end-column="65" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>

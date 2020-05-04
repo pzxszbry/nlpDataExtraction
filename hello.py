@@ -76,7 +76,7 @@ class Solution:
                         # print(list(each.rights)[])
                         if list(each.rights) and list(each.rights)[0].pos_=="SCONJ":
                             beBought = list(list(each.rights)[0].rights)[0]
-                            arguments["item"] = str(beBought,beBought.conjuncts)
+                            arguments["item"] = str(str(beBought)+" "+str(beBought.conjuncts))
                         else:
                             arguments["item"] = str(each)
 
@@ -342,7 +342,7 @@ class Solution:
     # def word
     def main(self):
         # self.file = open("WikipediaArticles_coref/Amazon_com_coref.txt")
-        self.file = open("WikipediaArticles_coref/AppleInc.txt")
+        self.file = open("WikipediaArticles_coref/IBM_coref.txt")
         # file = open("WikipediaArticles/IBM.txt")
         # file = open("WikipediaArticles/AppleInc.txt")
         # self.file = open("WikipediaArticles/Dallas.txt")
