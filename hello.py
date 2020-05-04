@@ -193,7 +193,7 @@ class Solution:
                 arguments['Location'] = ','.join(Location)
                 thisextraction = {"template": 'Work', "sentence": str(eachSen), "arguments": arguments}
                 self.extraction.append(thisextraction)
-            return
+
         # for person in filter(lambda x: (x.ent_type_ == 'PERSON'), doc):
         #     PER = person
         #     LOCATION = None
