@@ -347,7 +347,7 @@ class Solution:
         # file = open("WikipediaArticles/AppleInc.txt")
         # self.file = open("WikipediaArticles/Dallas.txt")
         # self.file = open("test.txt")
-        self.file = open("input/test.txt", 'r', encoding='UTF-8-sig')
+        self.file = open("output/test_coref.txt", 'r', encoding='UTF-8-sig')
         # self.outputjson = open("output/outputjson.json","w")
 
 
