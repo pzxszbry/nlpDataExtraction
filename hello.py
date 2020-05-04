@@ -241,8 +241,8 @@ class Solution:
             arguments = dict()
             for l in filter(lambda x:(x.pos_=='ADP'),eachSent):
                 # print(l)
-                if (l.nbor(-1).ent_type_ in ['GPE','LOC'] or l.nbor(-1).pos_=='PROPN') and (l.right_edge.ent_type_ in ['GPE','LOC']):
-                    arguments['smallLoc']=str((l.nbor(-1)))
+                if (l.head.ent_type_ in ['GPE','LOC'] or l.head.pos_=='PROPN') and (l.right_edge.ent_type_ in ['GPE','LOC']):
+                    arguments['smallLoc']=str((l.head))
                     arguments['bigLoc'] = str(l.right_edge)
                     thisextraction = {"template": 'Location', "sentence": str(eachSent), "arguments": arguments}
                     self.extraction.append(thisextraction)
@@ -341,11 +341,12 @@ class Solution:
 
     # def word
     def main(self):
-        self.file = open("WikipediaArticles_coref/AppleInc_coref.txt")
+        # self.file = open("WikipediaArticles_coref/Amazon_com_coref.txt")
+        self.file = open("WikipediaArticles_coref/AppleInc.txt")
         # file = open("WikipediaArticles/IBM.txt")
         # file = open("WikipediaArticles/AppleInc.txt")
         # self.file = open("WikipediaArticles/Dallas.txt")
-        # self.file = open("test.txt")
+        # self.file = open("testForPartOf.txt")
         self.outputjson = open("outputjson.json","w")
 
 
